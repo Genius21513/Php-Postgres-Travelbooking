@@ -48,59 +48,6 @@
                         </ul>
                     </div>
                     <div class="relative" x-data="{ isOpen: false}">
-
-                        <!-- This example requires Tailwind CSS v2.0+ -->
-                        {{-- <div>                            
-                            <div class="mt-1 relative">
-                            <button type="button" class="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
-                                <span class="flex items-center">
-                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="flex-shrink-0 h-6 w-6 rounded-full">
-                                <span class="ml-3 block truncate">
-                                    1
-                                </span>
-                                </span>
-                                <span class="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                <!-- Heroicon name: solid/selector -->
-                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                                </span>
-                            </button>
-                            <ul x-show="isOpen" class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-3">
-                                <!--
-                                Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-                        
-                                Highlighted: "text-white bg-indigo-600", Not Highlighted: "text-gray-900"
-                                -->
-                                <li class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9" id="listbox-option-0" role="option">
-                                <div class="flex items-center">
-                                    <img src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="flex-shrink-0 h-6 w-6 rounded-full">
-                                    <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
-                                    <span class="font-normal ml-3 block truncate">
-                                    Wade Cooper
-                                    </span>
-                                </div>
-                        
-                                <!--
-                                    Checkmark, only display for selected option.
-                        
-                                    Highlighted: "text-white", Not Highlighted: "text-indigo-600"
-                                -->
-                                <span class="text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4">
-                                    <!-- Heroicon name: solid/check -->
-                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                    </svg>
-                                </span>
-                                </li>
-                        
-                                <!-- More items... -->
-                            </ul>
-                            </div>
-                        </div> --}}
-
-  
-
                         <button class="bg-white dark:bg-gray-800 flex items-center justify-between rounded w-auto cursor-pointer" @click="isOpen = !isOpen" @keydown.escape="isOpen = false">
                             <p class="pl-3 py-3 text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal font-medium flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -118,23 +65,66 @@
                             </div>
                         </button>
   
+                        {{-- <div class="w-full max-w-xs">
+                            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                              <div class="mb-4">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                  Username
+                                </label>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username">
+                              </div>
+                              <div class="mb-6">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                                  Password
+                                </label>
+                                <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************">
+                                <p class="text-red-500 text-xs italic">Please choose a password.</p>
+                              </div>
+                              <div class="flex items-center justify-between">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                                  Sign In
+                                </button>
+                                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                                  Forgot Password?
+                                </a>
+                              </div>
+                            </form>
+                            <p class="text-center text-gray-500 text-xs">
+                              &copy;2020 Acme Corp. All rights reserved.
+                            </p>
+                        </div> --}}
+
                         <ul x-show="isOpen" @click.away="isOpen = false" class="transition duration-300 bg-white dark:bg-gray-800 shadow rounded pb-1 w-48 absolute z-10" style="display:none">
-                            <li class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9" id="listbox-option-0" role="option">
-                                <div class="flex items-center">
-                                  <span class="font-normal ml-3 block truncate">1</span>
-                                </div>
-                                
-                                <span class="text-indigo-600 absolute inset-y-0 right-0 flex items-center mr-4">
-                                  <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                  </svg>
-                                </span>
-                            </li>
-                            <li class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9" id="listbox-option-0" role="option">
-                                <div class="flex items-center">
-                                  <span class="font-normal ml-3 block truncate">2</span>
-                                </div>                                
-                            </li>
+                            <div class="w-full max-w-xs">
+                                <form class="bg-white rounded p-4 mt-2">
+                                    <div class="mb-2 flex items-center">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="Adults">Adults</label>
+                                        <button class="focus:outline-none justify-center rounded-md py-3 px-3 bg-indigo-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="#FFFFFF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <circle cx="10" cy="10" r="7" />
+                                                <line x1="21" y1="21" x2="15" y2="15" />
+                                            </svg>
+                                        </button>
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="Adults">1</label>
+                                        <button class="focus:outline-none justify-center rounded-md py-3 px-3 bg-indigo-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="#FFFFFF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <circle cx="10" cy="10" r="7" />
+                                                <line x1="21" y1="21" x2="15" y2="15" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            {{-- <button class="focus:outline-none justify-center rounded-md py-3 px-3 bg-indigo-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="#FFFFFF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <circle cx="10" cy="10" r="7" />
+                                    <line x1="21" y1="21" x2="15" y2="15" />
+                                </svg>
+                            </button> --}}
                         </ul>
                     </div>
                     <div class="relative" x-data="{ isOpen: false}">
