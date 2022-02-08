@@ -2,59 +2,6 @@
 
 @section('content')
 
-
-    <!-- This example requires Tailwind CSS v2.0+ -->
-    <div class="px-auto mx-auto">
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                    <th scope="col" class="relative px-6 py-3">
-                        <span class="sr-only">Edit</span>
-                    </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center">
-                        <div class="flex-shrink-0 h-10 w-10">
-                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
-                        </div>
-                        <div class="ml-4">
-                            <div class="text-sm font-medium text-gray-900">Jane Cooper</div>
-                            <div class="text-sm text-gray-500">jane.cooper@example.com</div>
-                        </div>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-                        <div class="text-sm text-gray-500">Optimization</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"> Active </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Admin</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                    </td>
-                    </tr>
-
-                    <!-- More people... -->
-                </tbody>
-                </table>
-            </div>
-            </div>
-        </div>
-    </div>
-
-
 	<main class="max-w-6xl mx-auto">
         <section class="relative">
             <div class="sm:px-6 lg:px-8">
@@ -121,39 +68,132 @@
                         </button>
                         
 
-                        <ul x-show="isOpen" @click.away="isOpen = false" class="transition duration-300 bg-white dark:bg-gray-800 shadow rounded pb-1 w-48 absolute z-10" style="display:none">
-                            <div class="w-full max-w-xs">
-                                <form class="bg-white rounded p-4 mt-2">
-                                    <div class="mb-2 flex items-center">
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="Adults">Adults</label>
-                                        <button class="focus:outline-none justify-center rounded-md py-3 px-3 bg-indigo-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="15" height="15" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                <line x1="12" y1="5" x2="12" y2="19" />
-                                                <line x1="5" y1="12" x2="19" y2="12" />
-                                            </svg>
-                                        </button>
-                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="Adults">1</label>
-                                        <button class="focus:outline-none justify-center rounded-md py-3 px-3 bg-indigo-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="15" height="15" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                <line x1="12" y1="5" x2="12" y2="19" />
-                                                <line x1="5" y1="12" x2="19" y2="12" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                        <ul x-show="isOpen" @click.away="isOpen = false" class="transition duration-300 bg-white dark:bg-gray-800 shadow rounded pb-1 w-96 absolute z-10" style="display:none">
+                            <div class="min-w-full">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr class="py-5">
+                                            <td class="px-6 whitespace-nowrap">
+                                                <div class="text-md font-medium text-gray-900">Adults</div>
+                                            </td>
+                                            <td class="px-6 whitespace-nowrap">
+                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <div class="text-md font-medium text-gray-900">1</div>
+                                            </td>
+                                            <td class="px-6 whitespace-nowrap">
+                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="py-5">
+                                            <td class="px-6 whitespace-nowrap">
+                                                <div class="items-center">
+                                                    <div class="text-md font-medium text-gray-900">Children</div>
+                                                    <div class="text-sm font-normal text-gray-900">Aged 2-11</div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 whitespace-nowrap">
+                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <div class="text-md font-medium text-gray-900">1</div>
+                                            </td>
+                                            <td class="px-6 whitespace-nowrap">
+                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="py-5">
+                                            <td class="px-6 whitespace-nowrap">
+                                                <div class="items-center">
+                                                    <div class="text-md font-medium text-gray-900">Infants</div>
+                                                    <div class="text-sm font-normal text-gray-900">In seat</div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 whitespace-nowrap">
+                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <div class="text-md font-medium text-gray-900">1</div>
+                                            </td>
+                                            <td class="px-6 whitespace-nowrap">
+                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="py-5">
+                                            <td class="px-6 whitespace-nowrap">
+                                                <div class="items-center">
+                                                    <div class="text-md font-medium text-gray-900">Infants</div>
+                                                    <div class="text-sm font-normal text-gray-900">On lap</div>
+                                                </div>
+                                            </td>
+                                            <td class="px-6 whitespace-nowrap">
+                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <div class="text-md font-medium text-gray-900">1</div>
+                                            </td>
+                                            <td class="px-6 whitespace-nowrap">
+                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
-                            {{-- <button class="focus:outline-none justify-center rounded-md py-3 px-3 bg-indigo-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="#FFFFFF" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <circle cx="10" cy="10" r="7" />
-                                    <line x1="21" y1="21" x2="15" y2="15" />
-                                </svg>
-                            </button> --}}
-                        </ul>
+                                <div class="max-w-full flex flex-col">
+                                    <div class="ms-auto items-center">
+                                        <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">Cancel</button>
+                                        <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">Done</button>
+                                    </div>
+                                </div>
+                            </div>   
+                     </ul>
                     </div>
+
                     <div class="relative" x-data="{ isOpen: false}">
                         <button class="bg-white dark:bg-gray-800 flex items-center justify-between rounded w-auto cursor-pointer" @click="isOpen = !isOpen" @keydown.escape="isOpen = false">
                             <p class="pl-3 py-3 text-gray-600 dark:text-gray-400 text-sm tracking-normal font-medium flex items-center">
@@ -224,58 +264,6 @@
                                 <line x1="21" y1="21" x2="15" y2="15" />
                             </svg>
                         </button>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <!-- This example requires Tailwind CSS v2.0+ -->
-            <div class="flex flex-col">
-                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                            <th scope="col" class="relative px-6 py-3">
-                                <span class="sr-only">Edit</span>
-                            </th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10">
-                                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60" alt="">
-                                </div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">Jane Cooper</div>
-                                    <div class="text-sm text-gray-500">jane.cooper@example.com</div>
-                                </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-                                <div class="text-sm text-gray-500">Optimization</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"> Active </span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Admin</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                            </td>
-                            </tr>
-
-                            <!-- More people... -->
-                        </tbody>
-                        </table>
-                    </div>
                     </div>
                 </div>
             </div>
