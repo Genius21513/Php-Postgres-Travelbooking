@@ -43,7 +43,17 @@
                             </div>
                         </button>
                         <ul x-show="isOpen" @click.away="isOpen = false" class="transition duration-300 bg-white dark:bg-gray-800 shadow rounded pb-1 w-48 absolute z-10" style="display:none">
-                            <li> <a tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3  hover:bg-gray-100 px-3 font-normal">Round trip</div></a></li>
+                            <li>
+                                <a tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400">
+                                    <div class="items-center flex flex-row cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3  hover:bg-gray-100 px-3 font-normal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="20" height="20" viewBox="0 0 24 24" stroke-width="3" stroke="#3730a3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M5 12l5 5l10 -10" />
+                                        </svg>
+                                        <span class="px-2">Round trip</span>
+                                    </div>
+                                </a>
+                            </li>
                             <li> <a tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100 px-3 font-normal">One way</div></a></li>
                             <li> <a tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100  px-3 font-normal">Multi-city</div></a></li>
                         </ul>
@@ -72,7 +82,7 @@
                             <div class="min-w-full">
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr class="py-5">
+                                        <tr class="py-6">
                                             <td class="px-6 whitespace-nowrap">
                                                 <div class="text-md font-medium text-gray-900">Adults</div>
                                             </td>
@@ -97,7 +107,7 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr class="py-5">
+                                        <tr class="py-6">
                                             <td class="px-6 whitespace-nowrap">
                                                 <div class="items-center">
                                                     <div class="text-md font-medium text-gray-900">Children</div>
@@ -125,7 +135,7 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr class="py-5">
+                                        <tr class="py-6">
                                             <td class="px-6 whitespace-nowrap">
                                                 <div class="items-center">
                                                     <div class="text-md font-medium text-gray-900">Infants</div>
@@ -153,7 +163,7 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr class="py-5">
+                                        <tr class="py-6">
                                             <td class="px-6 whitespace-nowrap">
                                                 <div class="items-center">
                                                     <div class="text-md font-medium text-gray-900">Infants</div>
@@ -184,14 +194,14 @@
                                     </tbody>
                                 </table>
 
-                                <div class="max-w-full flex flex-col">
-                                    <div class="ms-auto items-center">
-                                        <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">Cancel</button>
-                                        <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">Done</button>
+                                <div class="max-w-full flex justify-end px-4">
+                                    <div class="items-end">
+                                        <button class="focus:outline-none justify-center rounded-md py-1 px-2 text-indigo-700 bg-white">Cancel</button>
+                                        <button class="focus:outline-none justify-center rounded-md py-1 px-2 text-indigo-700 bg-white">Done</button>
                                     </div>
                                 </div>
-                            </div>   
-                     </ul>
+                            </div>
+                        </ul>
                     </div>
 
                     <div class="relative" x-data="{ isOpen: false}">

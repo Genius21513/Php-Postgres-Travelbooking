@@ -1539,6 +1539,9 @@ input:invalid, textarea:invalid, select:invalid {
 .items-center {
 	align-items: center;
 }
+.items-end {
+	align-items: end;
+}
 .justify-start {
 	justify-content: flex-start;
 }
