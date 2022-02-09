@@ -62,7 +62,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg> 
-                                <span x-text="$store.flights.members.Sum"></span>
+                                <span x-text="$store.flights.members.all"></span>
                             </p>
                             <div class="cursor-pointer text-gray-600 dark:text-gray-400 mx-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" x-show="isOpen" class="icon icon-tabler icon-tabler-chevron-up" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -75,13 +75,45 @@
                                 </svg>
                             </div>
                         </button>
-                        
 
                         <ul x-show="isOpen" @click.away="isOpen = false" class="transition duration-300 bg-white dark:bg-gray-800 shadow rounded pb-1 w-96 absolute z-10" style="display:none">
                             <div class="min-w-full">
                                 <table class="min-w-full divide-y divide-gray-200 py-6">
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr class="">
+                                        <template x-for="item in $store.flights.membersList">
+                                            <tr class="">
+                                                <td class="py-3 px-6 whitespace-nowrap">
+                                                    <div class="items-center">
+                                                        <div class="text-md font-medium text-gray-900"><span x-text="item.title"></span></div>
+                                                        <div class="text-sm font-normal text-gray-900"><span x-text="item.desc"></span></div>
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 whitespace-nowrap">
+                                                    <button @click="$store.flights.changeMembers(item.short, 'dec')" class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <div class="text-md font-medium text-gray-900">
+                                                        <span x-text="$store.flights.getNumbers(item.short)"></span>
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 whitespace-nowrap">
+                                                    <button @click="$store.flights.changeMembers(item.short, 'inc')" class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <line x1="12" y1="5" x2="12" y2="19" />
+                                                            <line x1="5" y1="12" x2="19" y2="12" />
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </template>
+
+                                        <!-- <tr class="">
                                             <td class="py-3 px-6 whitespace-nowrap">
                                                 <div class="text-md font-medium text-gray-900">Adults</div>
                                             </td>
@@ -197,20 +229,19 @@
                                                     </svg>
                                                 </button>
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
 
                                 <div class="max-w-full flex justify-end px-4 py-3">
                                     <div class="items-end">
                                         <button @click="isOpen = false" class="focus:outline-none justify-center rounded-md py-1 px-2 text-indigo-700 bg-white">Cancel</button>
-                                        <button @click="setMembers()" class="focus:outline-none justify-center rounded-md py-1 px-2 text-indigo-700 bg-white">Done</button>
+                                        <button @click="$store.flights.setMembers(); isOpen = false" class="focus:outline-none justify-center rounded-md py-1 px-2 text-indigo-700 bg-white">Done</button>
                                     </div>
                                 </div>
                             </div>
                         </ul>
                     </div>
-
                     <div class="relative" x-data="{ isOpen: false }">
                         <button class="bg-white dark:bg-gray-800 flex items-center justify-between rounded w-auto cursor-pointer" @click="isOpen = !isOpen" @keydown.escape="isOpen = false">
                             <p class="pl-3 py-3 text-gray-600 dark:text-gray-400 text-sm tracking-normal font-medium flex items-center">
@@ -260,12 +291,20 @@
                         <input type="text" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 py-3 sm:text-md border-gray-300 rounded-md" placeholder="Going To">
                     </div>
                     <div class="relative rounded-md">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <!-- <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                         </div>
-                        <input type="text" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 py-3 sm:text-md border-gray-300 rounded-md" placeholder="Check-In">
+                        <input type="text" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 py-3 sm:text-md border-gray-300 rounded-md" placeholder="Check-In"> -->
+
+                        <div class="datepicker relative form-floating mb-3 xl:w-96">
+                            <input type="text"
+                            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            placeholder="Select a date" />
+                            <label for="floatingInput" class="text-gray-700">Select a date</label>
+                        </div>
+                        
                     </div>
                     <div class="relative rounded-md">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -305,12 +344,50 @@
                 },
 
                 // members
+                membersList: [
+                    {
+                        title : "Adults",
+                        desc: "",
+                        short: "adu",
+                    },
+                    {
+                        title : "Childrens",
+                        desc: "Aged 2-11",
+                        short: "chi",
+                    },
+                    {
+                        title : "Infants",
+                        desc: "In seat",
+                        short: "ifs",
+                    },
+                    {
+                        title : "Infants",
+                        desc: "In lap",
+                        short: "ifl",
+                    },
+                ],
                 members: {
-                    adults: 1,
-                    childrens: 0,
-                    ifseats: 0,
-                    iflaps: 0,
-                    all: 1,   
+                    adu : 1,
+                    chi : 0,
+                    ifs : 0,
+                    ifl : 0,
+                    all : 1,
+                },
+                getNumbers(short) {
+                    switch (short) {
+                        case 'adu':
+                            return this.members.adu;
+                            break;
+                        case 'chi':
+                            return this.members.chi;
+                            break;
+                        case 'ifs':
+                            return this.members.ifs;
+                            break;
+                        case 'ifl':
+                            return this.members.ifl;
+                            break;
+                    }
                 },
                 changeMembers(type, met) {
                     // change the members object value with validation
@@ -319,24 +396,23 @@
                     ///// met String inc, dec
 
                     if (type === "adu") {
-                        met === 'inc'? this.members.adults ++: this.members.adults --;
+                        met === 'inc'? this.members.adu ++: this.members.adu --;
                     }
                     else if (type === "chi")
                     {
-                        met === 'inc'? this.members.childrens ++: this.members.childrens --;
+                        met === 'inc'? this.members.chi ++: this.members.chi --;
                     }
                     else if (type === "ifs")
                     {
-                        met === 'inc'? this.members.ifseats ++: this.members.ifseats --;
+                        met === 'inc'? this.members.ifs ++: this.members.ifs --;
                     }
                     else if (type === "ifl")
                     {
-                        met === 'inc'? this.members.iflaps ++: this.members.iflaps --;
+                        met === 'inc'? this.members.ifl ++: this.members.if --;
                     }
                 },
                 setMembers() {
-                    this.members.Sum = this.members.Adults + this.members.Children + this.members.InfantsSeat + this.members.InfantsLap; 
-                    this.isOpen = false;
+                    this.members.all = this.members.adu + this.members.chi + this.members.ifs + this.members.ifl; 
                 },
 
                 // plan
