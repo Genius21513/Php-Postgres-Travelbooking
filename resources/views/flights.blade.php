@@ -27,8 +27,8 @@
         </section>
         <section class="sm:px-6 lg:px-8 flex-col flex items-center justify-center my-8">
             <div class="bg-white shadow-md rounded-xl border border-gray-100 p-8">
-                <div class="md:flex items-start gap-3" x-data="{ trip : 'Round trip' }">
-                    <div class="relative" x-data="{ isOpen: false }">
+                <div class="md:flex items-start gap-3">
+                    <div class="relative" x-data="{ isOpen: false,  trip : 'Round trip' }">
                         <button class="bg-white dark:bg-gray-800 flex items-center justify-between rounded w-auto cursor-pointer" @click="isOpen = !isOpen" @keydown.escape="isOpen = false">
                             <p class="pl-3 py-3 text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal font-medium flex items-center"><svg enable-background="new 0 0 24 24" height="20" viewBox="0 0 24 24" width="20" focusable="false" class="mr-2" fill="currentColor"><g><g><polygon points="8.41,12.41 7,11 2,16 7,21 8.41,19.59 5.83,17 21,17 21,15 5.83,15"></polygon><polygon points="15.59,11.59 17,13 22,8 17,3 15.59,4.41 18.17,7 3,7 3,9 18.17,9"></polygon></g></g></svg> 
                             <span x-text="trip"></span>
@@ -46,7 +46,7 @@
                         </button>
                         <ul x-show="isOpen" @click.away="isOpen = false" class="transition duration-300 bg-white dark:bg-gray-800 shadow rounded pb-1 w-48 absolute z-10" style="display:none">
                             <li>
-                                <a x-on:click="trip = 'Round trip' " tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400">
+                                <a x-on:click="trip = 'Round trip'; isOpen = false; " tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400">
                                     <div class="flex flex-row cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3  hover:bg-gray-100 px-3 font-normal">
                                         <!-- <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="20" height="20" viewBox="0 0 24 24" stroke-width="3" stroke="#3730a3" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -58,16 +58,28 @@
                                     </div>
                                 </a>
                             </li>
-                            <li> <a x-on:click="trip = 'One way' " tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100 px-3 font-normal">One way</div></a></li>
-                            <li> <a x-on:click="trip = 'Multi-city' " tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100  px-3 font-normal">Multi-city</div></a></li>
+                            <li> <a x-on:click="trip = 'One way'; isOpen = false;" tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100 px-3 font-normal">One way</div></a></li>
+                            <li> <a x-on:click="trip = 'Multi-city'; isOpen = false; " tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100  px-3 font-normal">Multi-city</div></a></li>
                         </ul>
                     </div>
-                    <div class="relative" x-data="{ isOpen: false}">
+                    <div class="relative" x-data="{
+                        isOpen: false, 
+                        members: {
+                            Adults: 1,
+                            Children: 0,
+                            InfantsSeat: 0,
+                            InfantsLap: 0,                            
+                        },
+                        allMembers: () => { return this.members.Adults; }
+                    }">
+
                         <button class="bg-white dark:bg-gray-800 flex items-center justify-between rounded w-auto cursor-pointer" @click="isOpen = !isOpen" @keydown.escape="isOpen = false">
                             <p class="pl-3 py-3 text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal font-medium flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg> 4 </p>
+                                </svg> 
+                                <span x-text="allMembers"></span>
+                            </p>
                             <div class="cursor-pointer text-gray-600 dark:text-gray-400 mx-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" x-show="isOpen" class="icon icon-tabler icon-tabler-chevron-up" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" />
@@ -83,14 +95,14 @@
 
                         <ul x-show="isOpen" @click.away="isOpen = false" class="transition duration-300 bg-white dark:bg-gray-800 shadow rounded pb-1 w-96 absolute z-10" style="display:none">
                             <div class="min-w-full">
-                                <table class="min-w-full divide-y divide-gray-200">
+                                <table class="min-w-full divide-y divide-gray-200 py-6">
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr class="py-6">
-                                            <td class="px-6 whitespace-nowrap">
+                                        <tr class="">
+                                            <td class="py-3 px-6 whitespace-nowrap">
                                                 <div class="text-md font-medium text-gray-900">Adults</div>
                                             </td>
                                             <td class="px-6 whitespace-nowrap">
-                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                <button  @click="members.Adults --" class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                     <line x1="5" y1="12" x2="19" y2="12" />
@@ -98,10 +110,11 @@
                                                 </button>
                                             </td>
                                             <td>
-                                                <div class="text-md font-medium text-gray-900">1</div>
+                                                <div class="text-md font-medium text-gray-900">
+                                                <span x-text="members.Adults"></span></div>
                                             </td>
                                             <td class="px-6 whitespace-nowrap">
-                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                <button  @click="members.Adults ++" class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                         <line x1="12" y1="5" x2="12" y2="19" />
@@ -110,15 +123,15 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr class="py-6">
-                                            <td class="px-6 whitespace-nowrap">
+                                        <tr class="">
+                                            <td class="py-3 px-6 whitespace-nowrap">
                                                 <div class="items-center">
                                                     <div class="text-md font-medium text-gray-900">Children</div>
                                                     <div class="text-sm font-normal text-gray-900">Aged 2-11</div>
                                                 </div>
                                             </td>
                                             <td class="px-6 whitespace-nowrap">
-                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                <button @click="members.Children --" class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                     <line x1="5" y1="12" x2="19" y2="12" />
@@ -126,10 +139,12 @@
                                                 </button>
                                             </td>
                                             <td>
-                                                <div class="text-md font-medium text-gray-900">1</div>
+                                                <div class="text-md font-medium text-gray-900">
+                                                <span x-text="members.Children"></span>
+                                                </div>
                                             </td>
                                             <td class="px-6 whitespace-nowrap">
-                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                <button @click="members.Children ++" class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                         <line x1="12" y1="5" x2="12" y2="19" />
@@ -138,15 +153,15 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr class="py-6">
-                                            <td class="px-6 whitespace-nowrap">
+                                        <tr class="">
+                                            <td class="py-3 px-6 whitespace-nowrap">
                                                 <div class="items-center">
                                                     <div class="text-md font-medium text-gray-900">Infants</div>
                                                     <div class="text-sm font-normal text-gray-900">In seat</div>
                                                 </div>
                                             </td>
                                             <td class="px-6 whitespace-nowrap">
-                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                <button @click="members.InfantsSeat --" class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                     <line x1="5" y1="12" x2="19" y2="12" />
@@ -154,10 +169,12 @@
                                                 </button>
                                             </td>
                                             <td>
-                                                <div class="text-md font-medium text-gray-900">1</div>
+                                                <div class="text-md font-medium text-gray-900">
+                                                    <span x-text="members.InfantsSeat"></span>
+                                                </div>
                                             </td>
                                             <td class="px-6 whitespace-nowrap">
-                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                <button @click="members.InfantsSeat ++" class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                         <line x1="12" y1="5" x2="12" y2="19" />
@@ -166,15 +183,15 @@
                                                 </button>
                                             </td>
                                         </tr>
-                                        <tr class="py-6">
-                                            <td class="px-6 whitespace-nowrap">
+                                        <tr class="">
+                                            <td class="py-3 px-6 whitespace-nowrap">
                                                 <div class="items-center">
                                                     <div class="text-md font-medium text-gray-900">Infants</div>
                                                     <div class="text-sm font-normal text-gray-900">On lap</div>
                                                 </div>
                                             </td>
                                             <td class="px-6 whitespace-nowrap">
-                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                <button @click="members.InfantsLap --" class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                     <line x1="5" y1="12" x2="19" y2="12" />
@@ -182,10 +199,12 @@
                                                 </button>
                                             </td>
                                             <td>
-                                                <div class="text-md font-medium text-gray-900">1</div>
+                                                <div class="text-md font-medium text-gray-900">
+                                                    <span x-text="members.InfantsLap"></span>
+                                                </div>
                                             </td>
                                             <td class="px-6 whitespace-nowrap">
-                                                <button class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
+                                                <button @click="members.InfantsLap ++" class="focus:outline-none justify-center hover:bg-indigo-800 rounded-md py-3 px-3 bg-indigo-500">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="10" height="10" viewBox="0 0 24 24" stroke-width="3" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                                         <line x1="12" y1="5" x2="12" y2="19" />
@@ -197,20 +216,39 @@
                                     </tbody>
                                 </table>
 
-                                <div class="max-w-full flex justify-end px-4">
+                                <div class="max-w-full flex justify-end px-4 py-3">
                                     <div class="items-end">
                                         <button class="focus:outline-none justify-center rounded-md py-1 px-2 text-indigo-700 bg-white">Cancel</button>
                                         <button class="focus:outline-none justify-center rounded-md py-1 px-2 text-indigo-700 bg-white">Done</button>
                                     </div>
                                 </div>
+
+                                <script>
+                                    function loadMems() {
+                                        return {
+                                            isOpen: false, 
+                                            members: {
+                                                Adults: 1,
+                                                Children: 0,
+                                                InfantsSeat: 0,
+                                                InfantsLap: 0,
+                                                Sum: () => {
+                                                    console.log(this.members)
+                                                },
+                                            },
+                                        }
+                                    }
+                                </script>
+
                             </div>
                         </ul>
                     </div>
 
-                    <div class="relative" x-data="{ isOpen: false}">
+                    <div class="relative" x-data="{ isOpen: false, plan : 'Economy' }">
                         <button class="bg-white dark:bg-gray-800 flex items-center justify-between rounded w-auto cursor-pointer" @click="isOpen = !isOpen" @keydown.escape="isOpen = false">
                             <p class="pl-3 py-3 text-gray-600 dark:text-gray-400 text-sm tracking-normal font-medium flex items-center">
-                                <span class="h-5">Economy</span>
+                                <span class="h-5" x-text="plan">
+                                Economy</span>
                             </p>
                             <div class="cursor-pointer text-gray-600 dark:text-gray-400 mx-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" x-show="isOpen" class="icon icon-tabler icon-tabler-chevron-up" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -224,10 +262,10 @@
                             </div>
                         </button>
                         <ul x-show="isOpen" @click.away="isOpen = false" class="transition duration-300 bg-white dark:bg-gray-800 shadow rounded mt-2 pb-1 w-48 absolute z-10" style="display:none">
-                            <li> <a tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100 px-3 font-normal">Economy</div></a></li>
-                            <li> <a tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100 px-3 font-normal">Premium economy</div></a></li>
-                            <li> <a tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100  px-3 font-normal">Business</div></a></li>
-                            <li> <a tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100  px-3 font-normal">First</div></a></li>
+                            <li> <a @click=" plan = 'Economy'; isOpen = false " tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100 px-3 font-normal">Economy</div></a></li>
+                            <li> <a @click=" plan = 'Premium economy'; isOpen = false " tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100 px-3 font-normal">Premium economy</div></a></li>
+                            <li> <a @click=" plan = 'Business'; isOpen = false " tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100  px-3 font-normal">Business</div></a></li>
+                            <li> <a @click=" plan = 'First'; isOpen = false " tabindex="0" class="hover:bg-gray-100 focus:outline-none focus:underline focus:text-gray-400"><div class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm dark:hover:bg-gray-600 dark:hover:text-white leading-3 tracking-normal py-3 hover:bg-gray-100  px-3 font-normal">First</div></a></li>
                         </ul>
                     </div>
                 </div>
@@ -286,4 +324,19 @@
         <x-testimonial/>
         <x-newsletter/>
 	</main>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('flights', {
+                tripType : "Round trip",
+                members: {
+                    Adults: 1,
+                    Children: 0,
+                    InfantsSeat: 0,
+                    InfantsLap: 0,
+                },
+                plan: "Economy",
+            })
+        })
+    </script>
 @endsection
