@@ -460,7 +460,7 @@ iframe,
 embed,
 object {
   display: block; /* 1 */
-  /* vertical-align: middle;  2 */
+  vertical-align: middle; /* 2 */
 }
 /**
  * Constrain images and videos to the parent width and preserve
@@ -1240,6 +1240,9 @@ input:invalid, textarea:invalid, select:invalid {
 .z-0 {
 	z-index: 0;
 }
+.m-0 {
+	margin: 0px;
+}
 .-m-3 {
 	margin: -0.75rem;
 }
@@ -1319,6 +1322,9 @@ input:invalid, textarea:invalid, select:invalid {
 }
 .mr-4 {
 	margin-right: 1rem;
+}
+.mb-3 {
+	margin-bottom: 0.75rem;
 }
 .mt-24 {
 	margin-top: 6rem;
@@ -1434,6 +1440,9 @@ input:invalid, textarea:invalid, select:invalid {
 .w-5 {
 	width: 1.25rem;
 }
+.w-96 {
+	width: 24rem;
+}
 .w-2\/5 {
 	width: 40%;
 }
@@ -1455,11 +1464,17 @@ input:invalid, textarea:invalid, select:invalid {
 .w-4 {
 	width: 1rem;
 }
+.min-w-full {
+	min-width: 100%;
+}
 .max-w-6xl {
 	max-width: 72rem;
 }
 .max-w-sm {
 	max-width: 24rem;
+}
+.max-w-full {
+	max-width: 100%;
 }
 .max-w-4xl {
 	max-width: 56rem;
@@ -1521,6 +1536,9 @@ input:invalid, textarea:invalid, select:invalid {
 .grid-cols-2 {
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+.flex-row {
+	flex-direction: row;
+}
 .flex-col {
 	flex-direction: column;
 }
@@ -1536,11 +1554,11 @@ input:invalid, textarea:invalid, select:invalid {
 .items-start {
 	align-items: flex-start;
 }
+.items-end {
+	align-items: flex-end;
+}
 .items-center {
 	align-items: center;
-}
-.items-end {
-	align-items: end;
 }
 .justify-start {
 	justify-content: flex-start;
@@ -1600,10 +1618,19 @@ input:invalid, textarea:invalid, select:invalid {
 	margin-right: calc(2.5rem * var(--tw-space-x-reverse));
 	margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
+.divide-y > :not([hidden]) ~ :not([hidden]) {
+	--tw-divide-y-reverse: 0;
+	border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+	border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
 .divide-y-2 > :not([hidden]) ~ :not([hidden]) {
 	--tw-divide-y-reverse: 0;
 	border-top-width: calc(2px * calc(1 - var(--tw-divide-y-reverse)));
 	border-bottom-width: calc(2px * var(--tw-divide-y-reverse));
+}
+.divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+	--tw-divide-opacity: 1;
+	border-color: rgba(229, 231, 235, var(--tw-divide-opacity));
 }
 .divide-gray-50 > :not([hidden]) ~ :not([hidden]) {
 	--tw-divide-opacity: 1;
@@ -1665,6 +1692,9 @@ input:invalid, textarea:invalid, select:invalid {
 }
 .border-t {
 	border-top-width: 1px;
+}
+.border-solid {
+	border-style: solid;
 }
 .border-gray-300 {
 	--tw-border-opacity: 1;
@@ -1752,6 +1782,9 @@ input:invalid, textarea:invalid, select:invalid {
 .bg-cover {
 	background-size: cover;
 }
+.bg-clip-padding {
+	background-clip: padding-box;
+}
 .bg-origin-border {
 	background-origin: border-box;
 }
@@ -1809,6 +1842,22 @@ input:invalid, textarea:invalid, select:invalid {
 	padding-top: 3rem;
 	padding-bottom: 3rem;
 }
+.py-6 {
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+}
+.py-1 {
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+}
+.px-2 {
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+}
+.py-1\.5 {
+	padding-top: 0.375rem;
+	padding-bottom: 0.375rem;
+}
 .px-0 {
 	padding-left: 0px;
 	padding-right: 0px;
@@ -1821,14 +1870,6 @@ input:invalid, textarea:invalid, select:invalid {
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
 }
-.py-6 {
-	padding-top: 1.5rem;
-	padding-bottom: 1.5rem;
-}
-.py-1 {
-	padding-top: 0.25rem;
-	padding-bottom: 0.25rem;
-}
 .py-10 {
 	padding-top: 2.5rem;
 	padding-bottom: 2.5rem;
@@ -1840,10 +1881,6 @@ input:invalid, textarea:invalid, select:invalid {
 .px-8 {
 	padding-left: 2rem;
 	padding-right: 2rem;
-}
-.px-2 {
-	padding-left: 0.5rem;
-	padding-right: 0.5rem;
 }
 .pt-16 {
 	padding-top: 4rem;
@@ -2004,21 +2041,21 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-text-opacity: 1;
 	color: rgba(79, 70, 229, var(--tw-text-opacity));
 }
-.text-gray-500 {
-	--tw-text-opacity: 1;
-	color: rgba(107, 114, 128, var(--tw-text-opacity));
-}
 .text-gray-900 {
 	--tw-text-opacity: 1;
 	color: rgba(17, 24, 39, var(--tw-text-opacity));
 }
-.text-indigo-200 {
-	--tw-text-opacity: 1;
-	color: rgba(199, 210, 254, var(--tw-text-opacity));
-}
 .text-gray-700 {
 	--tw-text-opacity: 1;
 	color: rgba(55, 65, 81, var(--tw-text-opacity));
+}
+.text-gray-500 {
+	--tw-text-opacity: 1;
+	color: rgba(107, 114, 128, var(--tw-text-opacity));
+}
+.text-indigo-200 {
+	--tw-text-opacity: 1;
+	color: rgba(199, 210, 254, var(--tw-text-opacity));
 }
 .text-red-900 {
 	--tw-text-opacity: 1;
@@ -2168,6 +2205,10 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-bg-opacity: 1;
 	background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
 }
+.hover\:bg-indigo-800:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(55, 48, 163, var(--tw-bg-opacity));
+}
 .hover\:bg-gray-50:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
@@ -2178,10 +2219,6 @@ input:invalid, textarea:invalid, select:invalid {
 .hover\:bg-white:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
-}
-.hover\:bg-indigo-800:hover {
-	--tw-bg-opacity: 1;
-	background-color: rgba(55, 48, 163, var(--tw-bg-opacity));
 }
 .hover\:bg-indigo-500:hover {
 	--tw-bg-opacity: 1;
@@ -2248,6 +2285,10 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-border-opacity: 1;
 	border-color: rgba(99, 102, 241, var(--tw-border-opacity));
 }
+.focus\:border-blue-600:focus {
+	--tw-border-opacity: 1;
+	border-color: rgba(37, 99, 235, var(--tw-border-opacity));
+}
 .focus\:border-blue-300:focus {
 	--tw-border-opacity: 1;
 	border-color: rgba(147, 197, 253, var(--tw-border-opacity));
@@ -2264,6 +2305,10 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-bg-opacity: 1;
 	background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
 }
+.focus\:bg-white:focus {
+	--tw-bg-opacity: 1;
+	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+}
 .focus\:text-indigo-400:focus {
 	--tw-text-opacity: 1;
 	color: rgba(129, 140, 248, var(--tw-text-opacity));
@@ -2275,6 +2320,10 @@ input:invalid, textarea:invalid, select:invalid {
 .focus\:text-indigo-600:focus {
 	--tw-text-opacity: 1;
 	color: rgba(79, 70, 229, var(--tw-text-opacity));
+}
+.focus\:text-gray-700:focus {
+	--tw-text-opacity: 1;
+	color: rgba(55, 65, 81, var(--tw-text-opacity));
 }
 .focus\:underline:focus {
 	text-decoration: underline;
@@ -2683,6 +2732,9 @@ input:invalid, textarea:invalid, select:invalid {
 	}
 	.xl\:w-1\/4 {
 		width: 25%;
+	}
+	.xl\:w-96 {
+		width: 24rem;
 	}
 	.xl\:justify-around {
 		justify-content: space-around;

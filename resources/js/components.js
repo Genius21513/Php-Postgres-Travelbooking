@@ -1,4 +1,6 @@
-window.Components = {}, window.Components.listbox = function(t) {
+window.Components = {}, 
+
+window.Components.listbox = function(t) {
     return {
         init() {
             this.optionCount = this.$refs.listbox.children.length, this.$watch("activeIndex", (t => {
@@ -44,9 +46,9 @@ window.Components = {}, window.Components.listbox = function(t) {
         },
         ...t
     }
-}, window.Components.menu = function(t = {
-    open: !1
-}) {
+}, 
+
+window.Components.menu = function(t = { open: !1 }) {
     return {
         init() {
             this.items = Array.from(this.$el.querySelectorAll('[role="menuitem"]')), this.$watch("open", (() => {
@@ -85,7 +87,9 @@ window.Components = {}, window.Components.listbox = function(t) {
             }
         }
     }
-}, window.Components.popoverGroup = function() {
+}, 
+
+window.Components.popoverGroup = function() {
     return {
         __type: "popoverGroup",
         init() {
@@ -97,10 +101,9 @@ window.Components = {}, window.Components.listbox = function(t) {
             window.addEventListener("focus", t, !0)
         }
     }
-}, window.Components.popover = function({
-    open: t = !1,
-    focus: e = !1
-} = {}) {
+}, 
+
+window.Components.popover = function({ open: t = !1, focus: e = !1 } = {}) {
     const i = ["[contentEditable=true]", "[tabindex]", "a[href]", "area[href]", "button:not([disabled])", "iframe", "input:not([disabled])", "select:not([disabled])", "textarea:not([disabled])"].map((t => `${t}:not([tabindex='-1'])`)).join(",");
     return {
         __type: "popover",
@@ -142,18 +145,18 @@ window.Components = {}, window.Components.listbox = function(t) {
             this.open = !this.open, this.open ? this.restoreEl = t.currentTarget : this.restoreEl && this.restoreEl.focus()
         }
     }
-}, window.Components.radioGroup = function({
-    initialCheckedIndex: t = 0
-} = {}) {
+},
+
+window.Components.radioGroup = function({ initialCheckedIndex: t = 0 } = {}) {
     return {
         value: void 0,
         init() {
             this.value = Array.from(this.$el.querySelectorAll("input"))[t]?.value
         }
     }
-}, window.Components.desc = function({
-    open: t = 1
-} = {}) {
+}, 
+
+window.Components.desc = function({ open: t = 1 } = {}) {
     return {
         __type: "desc",
         open: t
