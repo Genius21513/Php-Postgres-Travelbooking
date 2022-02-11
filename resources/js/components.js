@@ -1,3 +1,16 @@
+
+import DateRangePicker from '@themesberg/tailwind-datepicker/DateRangePicker';
+const dateRangePickerEl = document.querySelector("[date-rangepicker]");
+new DateRangePicker(dateRangePickerEl, {
+    // options
+    autohide : true,
+    format : "mm/dd/yyyy",
+    orientation : "bottom right",
+    // title : "Select Date"
+});
+
+
+
 window.Components = {}, 
 
 window.Components.listbox = function(t) {
@@ -162,5 +175,7 @@ window.Components.desc = function({ open: t = 1 } = {}) {
         open: t
     }
 };
+
+
 
 
