@@ -1814,6 +1814,9 @@ input:invalid, textarea:invalid, select:invalid {
 .p-4 {
 	padding: 1rem;
 }
+.p-2\.5 {
+	padding: 0.625rem;
+}
 .px-4 {
 	padding-left: 1rem;
 	padding-right: 1rem;
@@ -2301,6 +2304,10 @@ input:invalid, textarea:invalid, select:invalid {
 	--tw-border-opacity: 1;
 	border-color: rgba(67, 56, 202, var(--tw-border-opacity));
 }
+.focus\:border-blue-500:focus {
+	--tw-border-opacity: 1;
+	border-color: rgba(59, 130, 246, var(--tw-border-opacity));
+}
 .focus\:bg-gray-200:focus {
 	--tw-bg-opacity: 1;
 	background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
@@ -2355,6 +2362,10 @@ input:invalid, textarea:invalid, select:invalid {
 .focus\:ring-white:focus {
 	--tw-ring-opacity: 1;
 	--tw-ring-color: rgba(255, 255, 255, var(--tw-ring-opacity));
+}
+.focus\:ring-blue-500:focus {
+	--tw-ring-opacity: 1;
+	--tw-ring-color: rgba(59, 130, 246, var(--tw-ring-opacity));
 }
 .focus\:ring-opacity-50:focus {
 	--tw-ring-opacity: 0.5;
