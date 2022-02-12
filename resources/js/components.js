@@ -1,16 +1,5 @@
 
-import DateRangePicker from '@themesberg/tailwind-datepicker/DateRangePicker';
-const dateRangePickerEl = document.querySelector("[date-rangepicker]");
-new DateRangePicker(dateRangePickerEl, {
-    // options
-    autohide : true,
-    format : "mm/dd/yyyy",
-    orientation : "bottom right",
-    // title : "Select Date"
-});
-
-
-
+// main components
 window.Components = {}, 
 
 window.Components.listbox = function(t) {

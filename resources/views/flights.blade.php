@@ -25,7 +25,8 @@
                 </div>
             </div>
         </section>
-        <section class="flex flex-col items-center justify-center my-8 sm:px-6 lg:px-8">
+        
+        <section class="flex flex-col items-center justify-center my-8 sm:px-6 lg:px-8" x-data="search">
             <div class="p-8 bg-white border border-gray-100 shadow-md rounded-xl">
                 <div class="items-center gap-3 md:flex">
                     <div class="relative" x-data="tripSelect()">
@@ -220,7 +221,7 @@
                     </div>
                     
                     <div class="relative rounded-md">
-                        <div date-rangepicker class="flex items-center">
+                        <div date-rangepicker datepicker-orientation="bottom" class="flex items-center">
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -241,7 +242,7 @@
                     </div>
 
                     <div class="items-center justify-end hidden md:flex">
-                        <button class="justify-center px-3 py-3 bg-indigo-500 rounded-md focus:outline-none">
+                        <button @click="goSearch()" class="justify-center px-3 py-3 bg-indigo-500 rounded-md focus:outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="26" height="26" viewBox="0 0 24 24" stroke-width="2" stroke="#FFFFFF" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <circle cx="10" cy="10" r="7" />
@@ -261,6 +262,14 @@
 
     <script>
 
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('search', () => ({
+                goSearch() {
+                    location.href = "{{ route('flights') }}";
+                }
+            }))
+        })
+
         //Trip Select
         function tripSelect() {
             return {
@@ -272,7 +281,6 @@
                 },
             }
         }
-        
 
         //Member Select
         function memberSelect() {
@@ -356,11 +364,11 @@
                 textInput: '',
                 items: [
                     {
-                        title : "Moscow, London",
+                        title : "Shanghai",
                         desc :  "Municiplaity",
                     },
                     {
-                        title : "China, London",
+                        title : "Paris",
                         desc :  "Rodiciplaity",
                     },
                 ],
@@ -384,11 +392,11 @@
                 textInput: '',
                 items: [
                     {
-                        title : "Moscow, London",
+                        title : "Shanghai",
                         desc :  "Municiplaity",
                     },
                     {
-                        title : "China, London",
+                        title : "Paris",
                         desc :  "Rodiciplaity",
                     },
                 ],
@@ -403,5 +411,6 @@
                 }
             }
         }
+
     </script>
 @endsection
