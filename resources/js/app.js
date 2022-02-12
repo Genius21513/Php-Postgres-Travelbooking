@@ -1,6 +1,6 @@
 require('./components');
 require('./bootstrap');
-require('./datepicker');
+// require('./datepicker');
 
 import Alpine from 'alpinejs';
 window.Alpine = Alpine;
