@@ -1,6 +1,7 @@
+require('./datepicker');
 require('./components');
 require('./bootstrap');
-require('./datepicker');
+
 
 
 // // date picker

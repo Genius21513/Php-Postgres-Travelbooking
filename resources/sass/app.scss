@@ -14,7 +14,7 @@
  *
  * See: https://github.com/laravel-frontend-presets/tall/issues/7
  */
- input:invalid, textarea:invalid, select:invalid {
+input:invalid, textarea:invalid, select:invalid {
     box-shadow: none;
 }
 
@@ -53,3 +53,9 @@
 [x-cloak] {
     display: none;
 }
+
+.datepicker.datepicker-dropdown {
+    @apply -ml-2 -mt-14 z-10 shadow border rounded-xl pt-0;
+}
+
+// @import "./custom-utilities.css";
