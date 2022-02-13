@@ -3,7 +3,7 @@
 @section('content')
 
 	<main class="max-w-6xl mx-auto">
-        <section class="relative">
+        <section class="flex flex-col">
             <div class="sm:px-6 lg:px-8">
                 <div class="relative">
                     <div class="absolute inset-0">
@@ -26,7 +26,7 @@
             </div>
         </section>
         
-        <section class="flex flex-col items-center justify-center my-8 sm:px-6 lg:px-8" x-data="search">
+        <section class="flex flex-col my-8 sm:px-6 lg:px-8" x-data="search">
             <div class="p-8 bg-white border border-gray-100 shadow-md rounded-xl">
                 <div class="items-center gap-3 md:flex">
                     <div class="relative" x-data="tripSelect()">
@@ -254,6 +254,55 @@
             </div>
         </section>
 
+        <section class="flex flex-col px-8 my-8" x-data="results">
+            <div class="p-8 bg-white border border-gray-100 shadow-md rounded-xl">
+                <div class="border border-gray-300 divide-y divide-gray-300 rounded-md">
+                    <div class="flex items-center py-5">
+                        <div class="px-3 text-center">
+                            <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
+                        </div>
+                        <div class="px-3 space-y-0.5 text-center">
+                            <p class="text-left text-gray-600">4:25 PM – 1:30 PM+1</p>
+                            <p class="text-left text-gray-500">Separate tickets booked togetherTurkish Airlines</p>
+                        </div>
+                        <div class="px-3 space-y-0.5 text-center">
+                            <p class="text-left text-gray-600">28 hr 25 min</p>
+                            <p class="text-left text-gray-500">CDG–MIA</p>
+                        </div>
+                        <div class="px-3 space-y-0.5 text-center">
+                            <p class="text-left text-gray-600">1 stop</p>
+                            <p class="text-left text-gray-500">11 hr 40 min SVO</p>
+                        </div>
+                        <div class="px-3 space-y-0.5 text-center">
+                            <p class="text-left text-gray-600">1,368 kg CO2</p>
+                            <p class="text-left text-gray-500">+45% emissions</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center py-5">
+                        <div class="px-3 text-center">
+                            <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
+                        </div>
+                        <div class="px-3 space-y-0.5 text-center">
+                            <p class="text-left text-gray-600">4:25 PM – 1:30 PM+1</p>
+                            <p class="text-left text-gray-500">Separate tickets booked togetherTurkish Airlines</p>
+                        </div>
+                        <div class="px-3 space-y-0.5 text-center">
+                            <p class="text-left text-gray-600">28 hr 25 min</p>
+                            <p class="text-left text-gray-500">CDG–MIA</p>
+                        </div>
+                        <div class="px-3 space-y-0.5 text-center">
+                            <p class="text-left text-gray-600">1 stop</p>
+                            <p class="text-left text-gray-500">11 hr 40 min SVO</p>
+                        </div>
+                        <div class="px-3 space-y-0.5 text-center">
+                            <p class="text-left text-gray-600">1,368 kg CO2</p>
+                            <p class="text-left text-gray-500">+45% emissions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <x-testimonial/>
         <x-newsletter/>
 	</main>
@@ -261,11 +310,24 @@
     
 
     <script>
-
+        //Alpine Data
         document.addEventListener('alpine:init', () => {
             Alpine.data('search', () => ({
-                goSearch() {
-                    location.href = "{{ route('flights') }}";
+                flights : {},
+                async goSearch() {                    
+                    // let response = await fetch('/api/label');
+                    // return await response.text();
+
+                    let base_url = 'http://rest.resvoyage.com';
+                    let url = base_url + '/api/v1/air/search?from1=MIA&to1=PAR&DepartureDate1=2022-02-13&Adults=1';
+                    
+                    fetch(url, {
+                        headers: {Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6IlRyYXZlbGNvIiwiQ2xpZW50SWQiOiIzNTcwIiwicm9sZSI6IkIyQyIsIlRyYXZlbEdyb3VwSWQiOiIzNzM3IiwiaXNzIjoiaHR0cDovL3Jlc3ZveWFnZS5jb20iLCJhdWQiOiJyZXN2b3lhZ2UiLCJleHAiOjE2NDQ3MzE3NjQsIm5iZiI6MTY0NDcxMzc2NH0.b1-amkfguCEzkGqAPzR6kgImybOS-DoKDtiLFg2tYcc'}
+                    })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                    });
                 }
             }))
         })
@@ -364,11 +426,11 @@
                 textInput: '',
                 items: [
                     {
-                        title : "Shanghai",
+                        title : "MIA",
                         desc :  "Municiplaity",
                     },
                     {
-                        title : "Paris",
+                        title : "PAR",
                         desc :  "Rodiciplaity",
                     },
                 ],
@@ -384,7 +446,6 @@
             }
         }
 
-
         // To Select
         function toSelect() {
             return {
@@ -392,11 +453,11 @@
                 textInput: '',
                 items: [
                     {
-                        title : "Shanghai",
+                        title : "MIA",
                         desc :  "Municiplaity",
                     },
                     {
-                        title : "Paris",
+                        title : "PAR",
                         desc :  "Rodiciplaity",
                     },
                 ],
