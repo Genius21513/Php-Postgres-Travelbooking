@@ -2,7 +2,33 @@
 
 @section('content')
 
-	<main class="max-w-6xl mx-auto">
+    <style>
+        .loader {
+            border-top-color: #3498db;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+
+        @-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spinner {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+	<main class="max-w-6xl mx-auto" x-data="search" x-init="init()">
         <section class="flex flex-col">
             <div class="sm:px-6 lg:px-8">
                 <div class="relative">
@@ -26,7 +52,7 @@
             </div>
         </section>
         
-        <section class="flex flex-col my-8 sm:px-6 lg:px-8" x-data="search">
+        <section class="flex flex-col my-8 sm:px-6 lg:px-8">
             <div class="p-8 bg-white border border-gray-100 shadow-md rounded-xl">
                 <div class="items-center gap-3 md:flex">
                     <div class="relative" x-data="tripSelect()">
@@ -146,8 +172,7 @@
                     
                 </div>
                 
-                <div class="items-center gap-2 md:flex">
-                    
+                <div class="items-center gap-3 my-2 md:flex">  
                     <div class="relative rounded-md" x-data="fromSelect()">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
@@ -254,54 +279,72 @@
             </div>
         </section>
 
-        <section class="flex flex-col px-8 my-8" x-data="results">
-            <div class="p-8 bg-white border border-gray-100 shadow-md rounded-xl">
+        <!-- <section class="flex flex-col px-8 my-8">
+            <div class="relative p-8 bg-white border border-gray-100 shadow-md rounded-xl">
                 <div class="border border-gray-300 divide-y divide-gray-300 rounded-md">
-                    <div class="flex items-center py-5">
-                        <div class="px-3 text-center">
-                            <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
-                        </div>
-                        <div class="px-3 space-y-0.5 text-center">
-                            <p class="text-left text-gray-600">4:25 PM – 1:30 PM+1</p>
-                            <p class="text-left text-gray-500">Separate tickets booked togetherTurkish Airlines</p>
-                        </div>
-                        <div class="px-3 space-y-0.5 text-center">
-                            <p class="text-left text-gray-600">28 hr 25 min</p>
-                            <p class="text-left text-gray-500">CDG–MIA</p>
-                        </div>
-                        <div class="px-3 space-y-0.5 text-center">
-                            <p class="text-left text-gray-600">1 stop</p>
-                            <p class="text-left text-gray-500">11 hr 40 min SVO</p>
-                        </div>
-                        <div class="px-3 space-y-0.5 text-center">
-                            <p class="text-left text-gray-600">1,368 kg CO2</p>
-                            <p class="text-left text-gray-500">+45% emissions</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center py-5">
-                        <div class="px-3 text-center">
-                            <img class="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
-                        </div>
-                        <div class="px-3 space-y-0.5 text-center">
-                            <p class="text-left text-gray-600">4:25 PM – 1:30 PM+1</p>
-                            <p class="text-left text-gray-500">Separate tickets booked togetherTurkish Airlines</p>
-                        </div>
-                        <div class="px-3 space-y-0.5 text-center">
-                            <p class="text-left text-gray-600">28 hr 25 min</p>
-                            <p class="text-left text-gray-500">CDG–MIA</p>
-                        </div>
-                        <div class="px-3 space-y-0.5 text-center">
-                            <p class="text-left text-gray-600">1 stop</p>
-                            <p class="text-left text-gray-500">11 hr 40 min SVO</p>
-                        </div>
-                        <div class="px-3 space-y-0.5 text-center">
-                            <p class="text-left text-gray-600">1,368 kg CO2</p>
-                            <p class="text-left text-gray-500">+45% emissions</p>
-                        </div>
-                    </div>
+                    <template x-for="d_1 in data">
+                        <template x-for="d_2 in d_1.AirItinerary.OriginDestinationOptions">
+                            <template x-for="seg in d_2.FlightSegments">
+                                <div class="flex items-center py-5">
+                                    <div class="w-1/12 px-3 text-center">                                    
+                                        <img class="w-12 h-auto rounded-full" :src="'http://rest.resvoyage.com/' + seg.AirlineLogo" alt="">
+                                    </div>
+                                    <div class="w-5/12 px-3 space-y-0.5 text-center">
+                                        <p class="text-left text-gray-600" x-text="seg.DepartureDate + '->' + seg.ArrivalDate"></p>
+                                        <p class="text-left text-gray-500" x-text="seg.MarketingAirlineName"></p>
+                                    </div>
+                                    <div class="w-3/12 px-3 space-y-0.5 text-center">
+                                        <p class="text-left text-gray-600" x-text="seg.Duration"></p>
+                                        <p class="text-left text-gray-500" x-text="seg.DepartureAirport + '->' + seg.ArrivalAirport"></p>
+                                    </div>                                    
+                                    <div class="w-3/12 px-3 space-y-0.5 text-center">
+                                        <p class="text-left text-gray-600" x-text="d_1.AirItineraryPricingInfo.TotalPrice + d_1.AirItineraryPricingInfo.CurrencyCode"></p>
+                                        <p class="text-left text-gray-500">**</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </section> -->
+        
+        <section class="flex flex-col px-8 my-8">
+            <div class="relative p-8 bg-white border border-gray-100 shadow-md rounded-xl">
+                <div class="border border-gray-300 divide-y divide-gray-300 rounded-md">
+                    <template x-for="d_1 in data">
+                        <template x-for="d_2 in d_1.AirItinerary.OriginDestinationOptions">
+                            <template x-for="seg in d_2.FlightSegments">
+                                <div class="flex items-center py-5">
+                                    <div class="w-1/12 px-3 text-center">                                    
+                                        <img class="w-12 h-auto rounded-full" :src="'http://rest.resvoyage.com/' + seg.AirlineLogo" alt="">
+                                    </div>
+                                    <div class="w-5/12 px-3 space-y-0.5 text-center">
+                                        <p class="text-left text-gray-600" x-text="seg.DepartureDate + '->' + seg.ArrivalDate"></p>
+                                        <p class="text-left text-gray-500" x-text="seg.MarketingAirlineName"></p>
+                                    </div>
+                                    <div class="w-3/12 px-3 space-y-0.5 text-center">
+                                        <p class="text-left text-gray-600" x-text="seg.Duration"></p>
+                                        <p class="text-left text-gray-500" x-text="seg.DepartureAirport + '->' + seg.ArrivalAirport"></p>
+                                    </div>                                    
+                                    <div class="w-3/12 px-3 space-y-0.5 text-center">
+                                        <p class="text-left text-gray-600" x-text="d_1.AirItineraryPricingInfo.TotalPrice + d_1.AirItineraryPricingInfo.CurrencyCode"></p>
+                                        <p class="text-left text-gray-500">**</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                    </template>
                 </div>
             </div>
         </section>
+        
+
+        <div x-show="isLoading" class="fixed top-0 bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-center w-full h-screen overflow-hidden bg-gray-700 opacity-75">
+            <div class="w-12 h-12 mb-4 ease-linear border-4 border-t-4 border-gray-200 rounded-full loader"></div>
+            <h2 class="text-xl font-semibold text-center text-white">Loading...</h2>
+            <p class="w-1/3 text-center text-white">This may take a few seconds, please don't close this page.</p>
+        </div>
         
         <x-testimonial/>
         <x-newsletter/>
@@ -310,23 +353,220 @@
     
 
     <script>
+
+        let a = {
+                    "PricedItineraries": [
+                        {
+                            "AirItinerary": {
+                                "DirectionInd": "OneWay",
+                                "OriginDestinationOptions": [
+                                    {
+                                        "SectorSequence": 1,
+                                        "FlightSegments": [
+                                            {
+                                                "RouteNumber": "SU111",
+                                                "FlightNumber": "111",
+                                                "MarketingAirlineCode": "SU",
+                                                "MarketingAirlineName": "Aeroflot",
+                                                "OperatingAirlineName": "Aeroflot",
+                                                "OperatingAirlineCode": "SU",
+                                                "Duration": "00:00:00",
+                                                "DepartureDate": "2022-02-13T13:55:00",
+                                                "ArrivalDate": "2022-02-14T08:35:00",
+                                                "DepartureAirport": "MIA",
+                                                "DepartureCountryCode": "US",
+                                                "ArrivalAirport": "SVO",
+                                                "ArrivalCountryCode": "RU",
+                                                "Aircraft": null,
+                                                "BookingClass": "R",
+                                                "ArrivalAirportName": "Moscow-Sheremetyevo Intl, Russian Federation",
+                                                "DepartureAirportName": "Miami-Miami Intl, FL, United States",
+                                                "BaggageFeeUrl": "https://bags.amadeus.com/Display.aspx?a=SU",
+                                                "FreeBaggages": null,
+                                                "Cabin": "Economy",
+                                                "AirlineLogo": "content/airline-logos/SU.png",
+                                                "DepartureTerminal": null,
+                                                "ArrivalTerminal": null,
+                                                "DepartureCityName": null,
+                                                "ArrivalCityName": null,
+                                                "SeatsLeft": 7
+                                            },
+                                            {
+                                                "RouteNumber": "SU2454",
+                                                "FlightNumber": "2454",
+                                                "MarketingAirlineCode": "SU",
+                                                "MarketingAirlineName": "Aeroflot",
+                                                "OperatingAirlineName": "Aeroflot",
+                                                "OperatingAirlineCode": "SU",
+                                                "Duration": "00:00:00",
+                                                "DepartureDate": "2022-02-14T10:15:00",
+                                                "ArrivalDate": "2022-02-14T12:25:00",
+                                                "DepartureAirport": "SVO",
+                                                "DepartureCountryCode": "RU",
+                                                "ArrivalAirport": "CDG",
+                                                "ArrivalCountryCode": "FR",
+                                                "Aircraft": "AIRBUS INDUSTRIE A320-100/200 JET",
+                                                "BookingClass": "R",
+                                                "ArrivalAirportName": "Paris-Charles De Gaulle, France",
+                                                "DepartureAirportName": "Moscow-Sheremetyevo Intl, Russian Federation",
+                                                "BaggageFeeUrl": "https://bags.amadeus.com/Display.aspx?a=SU",
+                                                "FreeBaggages": null,
+                                                "Cabin": "Economy",
+                                                "AirlineLogo": "content/airline-logos/SU.png",
+                                                "DepartureTerminal": null,
+                                                "ArrivalTerminal": null,
+                                                "DepartureCityName": null,
+                                                "ArrivalCityName": null,
+                                                "SeatsLeft": 7
+                                            }
+                                        ],
+                                        "Cabin": "Economy",
+                                        "JourneyTotalDuration": "16:30:00"
+                                    }
+                                ],
+                                "TicketTimeLimit": "2022-02-12T23:59:00"
+                            },
+                            "AirItineraryPricingInfo": {
+                                "TotalPrice": 471.7,
+                                "BasePrice": 220.0,
+                                "Tax": 251.7,
+                                "Markup": 0.0,
+                                "ServiceFee": 0.0,
+                                "Discount": 0.0,
+                                "PromotionalDiscount": 0.0,
+                                "CurrencyCode": "USD",
+                                "PTC_FareBreakdowns": [
+                                    {
+                                        "PTCIdentifier": null,
+                                        "Baggages": [
+                                            {
+                                                "SequenceNumber": 1,
+                                                "FlightNumber": "111",
+                                                "FreeQuantity": 0.0,
+                                                "Id": null,
+                                                "PassengerId": null,
+                                                "Title": null,
+                                                "Description": null,
+                                                "Amount": null,
+                                                "PassengerCode": "ADT",
+                                                "BagAllowanceType": "Piece",
+                                                "BagAllowanceUnit": "K"
+                                            },
+                                            {
+                                                "SequenceNumber": 2,
+                                                "FlightNumber": "2454",
+                                                "FreeQuantity": 0.0,
+                                                "Id": null,
+                                                "PassengerId": null,
+                                                "Title": null,
+                                                "Description": null,
+                                                "Amount": null,
+                                                "PassengerCode": "ADT",
+                                                "BagAllowanceType": "Piece",
+                                                "BagAllowanceUnit": "K"
+                                            }
+                                        ],
+                                        "FlightExtrasInfo": null,
+                                        "BasePriceFromItinerary": 220.0,
+                                        "BasePrice": 220.0,
+                                        "Markup": 0.0,
+                                        "Discount": 0.0,
+                                        "Tax": 251.7,
+                                        "DKFpbpAauncutUi4MFAAFCDAv8vRQvS1qG": 0.0,
+                                        "PromotionalDiscount": 0.0,
+                                        "TotalPrice": 471.7,
+                                        "PassengerCount": 1,
+                                        "PassengerType": "ADT",
+                                        "CodeContext": null,
+                                        "MarkupBreakdown": [],
+                                        "DiscountBreakdown": [],
+                                        "PromotionalDiscountBreakdown": [],
+                                        "ContractManagerDiscountBreakdown": null,
+                                        "FareBasisCodes": [
+                                            "RNOLA",
+                                            "RNOLA"
+                                        ]
+                                    }
+                                ],
+                                "PricingSource": null,
+                                "IsNegotiatedPrice": false,
+                                "FareType": "Published",
+                                "FareFamily": null,
+                                "ValidatingAirlineCode": "SU",
+                                "AdditionalFareInfos": [
+                                    {
+                                        "FareReference": "RNOLA",
+                                        "ValidatingAirlineCode": "",
+                                        "FareFamily": null,
+                                        "Cabin": "",
+                                        "DepartureAirport": "MIA",
+                                        "DepartureDate": "2022-02-13T13:55:00",
+                                        "ArrivalAirport": "SVO",
+                                        "Penalty": {
+                                            "Type": "TICKETS ARE NON-REFUNDABLE",
+                                            "Amount": 0.0,
+                                            "IsPercent": null
+                                        }
+                                    },
+                                    {
+                                        "FareReference": "RNOLA",
+                                        "ValidatingAirlineCode": "",
+                                        "FareFamily": null,
+                                        "Cabin": "",
+                                        "DepartureAirport": "SVO",
+                                        "DepartureDate": "2022-02-14T10:15:00",
+                                        "ArrivalAirport": "CDG",
+                                        "Penalty": {
+                                            "Type": "TICKETS ARE NON-REFUNDABLE",
+                                            "Amount": 0.0,
+                                            "IsPercent": null
+                                        }
+                                    }
+                                ]
+                            },
+                            "Id": "96f24587-fca4-4104-9456-8ce42594200f",
+                            "PolicyType": null,
+                            "DeepLinkUrl": "",
+                            "Provider": "Amadeus",
+                            "OfficeId": "SJC1S2400"
+                        },
+                    ]
+        };
+        
+        
         //Alpine Data
         document.addEventListener('alpine:init', () => {
             Alpine.data('search', () => ({
-                flights : {},
-                async goSearch() {                    
-                    // let response = await fetch('/api/label');
-                    // return await response.text();
+                isLoading : false,
+                data : a.PricedItineraries,
+                
 
+                init () {
+                    // console.log(this.data);
+                },
+                async goSearch() {
+                    this.isLoading = true;
+                    
                     let base_url = 'http://rest.resvoyage.com';
                     let url = base_url + '/api/v1/air/search?from1=MIA&to1=PAR&DepartureDate1=2022-02-13&Adults=1';
                     
-                    fetch(url, {
-                        headers: {Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6IlRyYXZlbGNvIiwiQ2xpZW50SWQiOiIzNTcwIiwicm9sZSI6IkIyQyIsIlRyYXZlbEdyb3VwSWQiOiIzNzM3IiwiaXNzIjoiaHR0cDovL3Jlc3ZveWFnZS5jb20iLCJhdWQiOiJyZXN2b3lhZ2UiLCJleHAiOjE2NDQ3MzE3NjQsIm5iZiI6MTY0NDcxMzc2NH0.b1-amkfguCEzkGqAPzR6kgImybOS-DoKDtiLFg2tYcc'}
+                    // let token_url = base_url + '/api/v1/public/token?clientname=VslYXzycTIi';
+                    // let token;
+                    // await fetch(url)
+                    // .then((res) => res.json())
+                    // .then((response) => {
+                    //     token = response.Token;
+                    // });
+                    
+                    let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6IlRyYXZlbGNvIiwiQ2xpZW50SWQiOiIzNTcwIiwicm9sZSI6IkIyQyIsIlRyYXZlbEdyb3VwSWQiOiIzNzM3IiwiaXNzIjoiaHR0cDovL3Jlc3ZveWFnZS5jb20iLCJhdWQiOiJyZXN2b3lhZ2UiLCJleHAiOjE2NDQ3NjI0NTcsIm5iZiI6MTY0NDc0NDQ1N30.gd74nIHAzw-LZ08g4ecbQ79toxZh3NKlw_BR6EdOz5k';
+
+                    await fetch(url, {
+                        headers: { Authorization: `Bearer ${token}` }
                     })
                     .then((res) => res.json())
-                    .then((data) => {
-                        console.log(data);
+                    .then((response) => {
+                        this.data = response.PricedItineraries;
+                        this.isLoading = false;
                     });
                 }
             }))
