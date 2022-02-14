@@ -376,11 +376,10 @@
         let base_url = 'http://rest.resvoyage.com';
         let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6IlRyYXZlbGNvIiwiQ2xpZW50SWQiOiIzNTcwIiwicm9sZSI6IkIyQyIsIlRyYXZlbEdyb3VwSWQiOiIzNzM3IiwiaXNzIjoiaHR0cDovL3Jlc3ZveWFnZS5jb20iLCJhdWQiOiJyZXN2b3lhZ2UiLCJleHAiOjE2NDQ3ODkzODcsIm5iZiI6MTY0NDc3MTM4N30.uuodUIafvSkpjuSRfOBj57LeItJPqG_akmtve_O1qsk';
 
-        let trip, plan, membs = {};
-        let from1, to1, from2, to2;
-        let departure1, departure2;
+        let trip = '', plan = '', membs = {};
+        let from1 = '', to1 = '', from2 = '', to2 = '';
+        let departure1 = '', departure2 = '';
 
-        // getToken();
         //Get Token
         async function getToken() {            
             let token_url = base_url + '/api/v1/public/token?clientname=VslYXzycTIi';
@@ -404,13 +403,32 @@
                 async goSearch() {
                     this.data = {};
 
-                    let from1 = document.querySelector('#from1').value;
-                    let to1 = document.querySelector('#to1').value;
+                    // selection url
+                    let sel = '';
+                    sel = '&FlightClass=' + plan;
+
+                    // members url
+                    let mem = '';
+                    if (membs.adu !== 0) {
+                        mem += '&Adults=' + membs.adu;
+                    }
+
+                    if (membs.chi !== 0) {
+                        mem += '&Children=' + membs.chi
+                    }
+
+                    if ((membs.ifs + membs.ifl) !== 0) {
+                        mem += '&Infants=' + (membs.ifs + membs.ifl);
+                    }
+
+                    // input url
+                    // let from1 = document.querySelector('#from1').value;
+                    // let to1 = document.querySelector('#to1').value;
                     let departure1 = document.querySelector('#departure1').value;
 
                     if (from1 === '' || to1 === '' || departure1 === '') return;
                     
-                    let url = base_url + `/api/v1/air/search?from1=${from1}&to1=${to1}&DepartureDate1=${departure1}&Adults=1`;
+                    let url = base_url + `/api/v1/air/search?from1=${from1}&to1=${to1}&DepartureDate1=${departure1}` + mem;
 
                     this.isLoading = true;
                     await fetch(url, {
@@ -438,7 +456,7 @@
                 },
                 change(t) {
                     this.tripInput = t;
-                    trip = this.tripInput;
+                    trip = t;
                 },
             }
         }
@@ -505,7 +523,7 @@
                 },
                 setMembers() {
                     this.members.all = this.members.adu + this.members.chi + this.members.ifs + this.members.ifl;
-                    // membs = JSON.parse(JSON.stringify(this.members));
+                    membs = JSON.parse(JSON.stringify(this.members));
                 },
             }
         }
@@ -521,7 +539,7 @@
                 },
                 change(p) {
                     this.planInput = p;
-                    // plan = p;
+                    plan = p;
                 },
             }
         }
@@ -548,7 +566,7 @@
                 select(t) {
                     this.fromInput = t;
                     this.isOpen = false;
-                    // from1 = this.fromInput;
+                    from1 = t;
                 }
             }
         }
@@ -575,7 +593,7 @@
                 select(t) {
                     this.toInput = t;
                     this.isOpen = false;
-                    // to1 = this.toInput;
+                    to1 = t;
                 }
             }
         }
