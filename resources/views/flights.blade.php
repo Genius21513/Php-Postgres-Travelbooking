@@ -57,7 +57,7 @@
         <section class="flex flex-col my-8 sm:px-6 lg:px-8">
             <div class="p-8 bg-white border border-gray-100 shadow-md rounded-xl">
                 <div class="items-center gap-3 md:flex">
-                    <div class="relative" x-data="tripSelect()">
+                    <div class="relative" x-data="tripSelect()" x-init="init()">
                         <button class="flex items-center justify-between w-auto bg-white rounded cursor-pointer dark:bg-gray-800" @click="isOpen = !isOpen" @keydown.escape="isOpen = false">
                             <p class="py-3 text-sm font-medium text-gray-600 dark:text-gray-400">
                                 <span id="trip" x-text="tripInput"></span>
@@ -76,7 +76,7 @@
                         
                         <ul x-show="isOpen" @click.away="isOpen = false" class="absolute z-10 w-48 transition duration-300 bg-white border rounded shadow dark:bg-gray-800">
                             <template x-for="trip in trips" :key="trip">
-                                <li x-on:click="chage(trip); isOpen = false;" class="flex flex-row px-3 py-3 text-sm font-normal leading-3 tracking-normal text-gray-600 cursor-pointer dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white hover:bg-gray-100">
+                                <li x-on:click="change(trip); isOpen = false;" class="flex flex-row px-3 py-3 text-sm font-normal leading-3 tracking-normal text-gray-600 cursor-pointer dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white hover:bg-gray-100">
                                     <a tabindex="0" class="focus:no-underline focus:text-gray-400" x-text="trip"></a>
                                 </li>
                             </template>
@@ -85,7 +85,7 @@
 
                     
 
-                    <div class="relative" x-data="memberSelect()">
+                    <div class="relative" x-data="memberSelect()" x-init="init()">
                         <button class="flex items-center justify-between w-auto bg-white rounded cursor-pointer dark:bg-gray-800" @click="isOpen = !isOpen" @keydown.escape="isOpen = false">
                             <p class="flex items-center py-3 pl-3 text-sm font-medium leading-3 tracking-normal text-gray-600 dark:text-gray-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -141,14 +141,14 @@
                                         </template>
                                     </tbody>
                                 </table>
-                                <button @click="setMembers(); isOpen = false" class="px-2 py-1 mt-2 text-white bg-blue-500 rounded-full focus:outline-none">Done</button>
+                                <button @click="setMembers(); isOpen = false" class="px-2 py-1 mt-2 text-white bg-indigo-500 rounded-full focus:outline-none">Done</button>
                             </div>
                         </ul>
                     </div>
                     
 
 
-                    <div class="relative" x-data="planSelect()">
+                    <div class="relative" x-data="planSelect()" x-init="init()">
                         <button class="flex items-center justify-between w-auto bg-white rounded cursor-pointer dark:bg-gray-800" @click="isOpen = !isOpen" @keydown.escape="isOpen = false">
                             <p class="flex items-center py-3 pl-3 text-sm font-medium tracking-normal text-gray-600 dark:text-gray-400">
                                 <span id="plan" class="h-5" x-text="planInput"></span>
@@ -185,9 +185,9 @@
                                 <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <input readonly id="from" type="text" @click="isOpen = true" x-model="fromInput" class="block py-3 pl-10 bg-gray-100 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-md" placeholder="Leaving From" />
+                        <input readonly id="from1" type="text" @click="isOpen = true" x-model="fromInput" class="block py-3 pl-10 bg-gray-100 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-md" placeholder="Leaving From" />
 
-                        <div class="absolute z-50 -ml-1 w-96 -mt-14" x-show="isOpen" x-trap="isOpen" style="display:none" @click.away="isOpen = false">
+                        <div class="absolute z-50 w-96" x-show="isOpen" x-trap="isOpen" style="display:none" @click.away="isOpen = false">
                             <div class="bg-white border rounded">
                                 <div class="flex p-4 text-gray-500">
                                     <input x-model="fromInput" @input="search()" class="px-4 text-gray-800 border-b-2 outline-none appearance-none" />
@@ -228,9 +228,9 @@
                                 <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <input readonly id="to" type="text" @click="isOpen = true" x-model="toInput" class="block py-3 pl-10 bg-gray-100 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-md" placeholder="Leaving From" />
+                        <input readonly id="to1" type="text" @click="isOpen = true" x-model="toInput" class="block py-3 pl-10 bg-gray-100 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-md" placeholder="Going To" />
 
-                        <div class="absolute z-50 -ml-1 w-96 -mt-14" x-show="isOpen" x-trap="isOpen" style="display:none" @click.away="isOpen = false">
+                        <div class="absolute z-50 w-96" x-show="isOpen" x-trap="isOpen" style="display:none" @click.away="isOpen = false">
                             <div class="bg-white border rounded">
                                 <div class="flex p-4 text-gray-500">
                                     <input x-model="toInput" @input="search()" class="px-4 text-gray-800 border-b-2 outline-none appearance-none" />
@@ -256,15 +256,15 @@
                     </div>
                     
                     
-                    <div class="relative rounded-md" x-data="{isOpen : false}">
-                        <div class="relative" @click.away="isOpen = false">
+                    <div class="relative rounded-md" x-data="dateSelect()">
+                        <div class="relative">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                             </div>
-                            <input datepicker id="start" readonly type="text" class="block w-full py-3 pl-10 bg-gray-100 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-md" placeholder="Select Date">
+                            <input datepicker datepicker-orientation="bottom" x-model="departure1" datepicker-format="yyyy-mm-dd" id="departure1" readonly type="text" class="block w-full py-3 pl-10 bg-gray-100 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-md" placeholder="Select Date">
                         </div>
                         
-                        <!-- <div x-show="false" date-rangepicker datepicker-orientation="bottom" class="flex items-center hidden">
+                        <!-- <div x-show="false" date-rangepicker datepicker-orientation="bottom" class="flex items-center">
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -300,25 +300,60 @@
         
         <section class="flex flex-col px-8 my-8">
             <div class="relative p-8 bg-white border border-gray-100 shadow-md rounded-xl">
-                <div class="border border-gray-300 divide-y divide-gray-300 rounded-md">
-                    <template x-if="data.DirectAirlines !== null">
-                        <template x-for="d in data.DirectAirlines">
-                            <div class="flex items-center py-5">
-                                <div class="w-1/12 px-3 text-center">                                    
-                                    <img class="w-12 h-auto rounded-full" :src="'http://rest.resvoyage.com/content/airline-logos/' + d.AirlineCode + '.png'" alt="">
-                                </div>
-                                <div class="w-5/12 px-3 space-y-0.5 text-center">
-                                    <p class="text-left text-gray-600" x-text="d.Departure"></p>
-                                    <p class="text-left text-gray-500" x-text="d.Airline"></p>
-                                </div>
-                                <div class="w-3/12 px-3 space-y-0.5 text-center">
-                                    <p class="text-left text-gray-600" x-text="d.Price + d.Currency"></p>
-                                    <p class="text-left text-gray-500">**</p>
-                                </div>
+                <template x-if="noData">
+                    <div> There are no data to show. </div>
+                </template>
+                <template x-if="(data.DirectAirlines !== undefined)">
+                    <template x-for="d in data.DirectAirlines">
+                        <div class="flex items-center py-5 border border-gray-300 mt-2">
+                            <div class="w-2/12 px-6 items-center">                                    
+                                <img class="w-12 h-auto rounded-full" :src="'http://rest.resvoyage.com/content/airline-logos/' + d.AirlineCode + '.png'" alt="">
                             </div>
-                        </template>
+                            <div class="w-5/12 px-6 space-y-0.5 items-center">
+                                <p class="text-left text-gray-600" x-text="d.Departure"></p>
+                                <p class="text-left text-gray-500" x-text="d.Airline"></p>
+                            </div>
+                            <div class="w-5/12 px-6 space-y-0.5 items-center">
+                                <p class="text-right text-gray-600" x-text="d.Price + d.Currency"></p>
+                                <p class="text-right text-gray-500">Nonstop</p>
+                            </div>
+                        </div>
                     </template>
-                </div>
+                </template>
+                <template x-if="(data.OneStopAirlines !== undefined)">
+                    <template x-for="d in data.DirectAirlines">
+                        <div class="flex items-center py-5 border border-gray-300 mt-2">
+                            <div class="w-2/12 px-6 items-center">                                    
+                                <img class="w-12 h-auto rounded-full" :src="'http://rest.resvoyage.com/content/airline-logos/' + d.AirlineCode + '.png'" alt="">
+                            </div>
+                            <div class="w-5/12 px-6 space-y-0.5 items-center">
+                                <p class="text-left text-gray-600" x-text="d.Departure"></p>
+                                <p class="text-left text-gray-500" x-text="d.Airline"></p>
+                            </div>
+                            <div class="w-5/12 px-6 space-y-0.5 items-center">
+                                <p class="text-right text-gray-600" x-text="d.Price + d.Currency"></p>
+                                <p class="text-right text-gray-500">1 stop</p>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+                <template x-if="(data.TwoStopAirlines !== undefined)">
+                    <template x-for="d in data.DirectAirlines">
+                        <div class="flex items-center py-5 border border-gray-300 mt-2">
+                            <div class="w-2/12 px-6 items-center">                                    
+                                <img class="w-12 h-auto rounded-full" :src="'http://rest.resvoyage.com/content/airline-logos/' + d.AirlineCode + '.png'" alt="">
+                            </div>
+                            <div class="w-5/12 px-6 space-y-0.5 items-center">
+                                <p class="text-left text-gray-600" x-text="d.Departure"></p>
+                                <p class="text-left text-gray-500" x-text="d.Airline"></p>
+                            </div>
+                            <div class="w-5/12 px-6 space-y-0.5 items-center">
+                                <p class="text-right text-gray-600" x-text="d.Price + d.Currency"></p>
+                                <p class="text-right text-gray-500">2 stop</p>
+                            </div>
+                        </div>
+                    </template>
+                </template>
             </div>
         </section>
         
@@ -341,6 +376,10 @@
         let base_url = 'http://rest.resvoyage.com';
         let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6IlRyYXZlbGNvIiwiQ2xpZW50SWQiOiIzNTcwIiwicm9sZSI6IkIyQyIsIlRyYXZlbEdyb3VwSWQiOiIzNzM3IiwiaXNzIjoiaHR0cDovL3Jlc3ZveWFnZS5jb20iLCJhdWQiOiJyZXN2b3lhZ2UiLCJleHAiOjE2NDQ3ODkzODcsIm5iZiI6MTY0NDc3MTM4N30.uuodUIafvSkpjuSRfOBj57LeItJPqG_akmtve_O1qsk';
 
+        let trip, plan, membs = {};
+        let from1, to1, from2, to2;
+        let departure1, departure2;
+
         // getToken();
         //Get Token
         async function getToken() {            
@@ -349,51 +388,31 @@
             .then((res) => res.json())
             .then((response) => {
                 token = response.Token;
-                // console.log(token);
             });
         }
 
-        //Alpine Data
-        // document.addEventListener('alpine:init', () => {
-        //     Alpine.data('search', () => ({
-        //         isLoading : false,
-        //         data : {},
-
-        //         init () {
-        //             // console.log(this.data);
-        //         },
-        //         async goSearch() {
-        //             this.isLoading = true;
-
-                    
-        //             let url = base_url + '/api/v1/air/search?from1=MIA&to1=PAR&DepartureDate1=2022-02-13&Adults=1';
-                    
-        //             await fetch(url, {
-        //                 headers: { Authorization: `Bearer ${token}` }
-        //             })
-        //             .then((res) => res.json())
-        //             .then((response) => {
-        //                 this.data = response.Matrix;
-        //                 this.isLoading = false;
-        //             });
-        //         }
-        //     }))
-        // })
-
-
+        //search
         function search() {
             return {
                 isLoading : false,
+                noData : true,
                 data : {},
-
                 init () {
                     getToken();
                 },
-                async goSearch() {
-                    this.isLoading = true;
 
-                    let url = base_url + '/api/v1/air/search?from1=MIA&to1=PAR&DepartureDate1=2022-02-13&Adults=1';
+                async goSearch() {
+                    this.data = {};
+
+                    let from1 = document.querySelector('#from1').value;
+                    let to1 = document.querySelector('#to1').value;
+                    let departure1 = document.querySelector('#departure1').value;
+
+                    if (from1 === '' || to1 === '' || departure1 === '') return;
                     
+                    let url = base_url + `/api/v1/air/search?from1=${from1}&to1=${to1}&DepartureDate1=${departure1}&Adults=1`;
+
+                    this.isLoading = true;
                     await fetch(url, {
                         headers: { Authorization: `Bearer ${token}` }
                     })
@@ -401,6 +420,8 @@
                     .then((response) => {
                         this.data = response.Matrix;
                         this.isLoading = false;
+                        // determine data show
+                        this.noData = false;
                     });
                 }
             }
@@ -412,8 +433,12 @@
                 isOpen : false,
                 trips : ["One way", "Round trip", "Multi-city"],
                 tripInput :  "One way",
-                chage(t) {
+                init() {
+                    trip = this.tripInput;
+                },
+                change(t) {
                     this.tripInput = t;
+                    trip = this.tripInput;
                 },
             }
         }
@@ -429,6 +454,9 @@
                     { title : "Infants", desc: "In lap", short: "ifl", },
                 ],
                 members: { adu : 1, chi : 0, ifs : 0, ifl : 0, all : 1, },
+                init() {
+                    membs = JSON.parse(JSON.stringify(this.members));
+                },
                 getNumbers(short) {
                     switch (short) {
                         case 'adu':
@@ -473,10 +501,11 @@
                         let o = this.members.ifl;
                         met === 'inc'? this.members.ifl ++: this.members.ifl --;
                         if (this.members.ifl < 0) this.members.ifl = o;
-                    }
+                    }  
                 },
                 setMembers() {
-                    this.members.all = this.members.adu + this.members.chi + this.members.ifs + this.members.ifl; 
+                    this.members.all = this.members.adu + this.members.chi + this.members.ifs + this.members.ifl;
+                    // membs = JSON.parse(JSON.stringify(this.members));
                 },
             }
         }
@@ -487,8 +516,12 @@
                 isOpen : false,
                 plans : ["Economy", "Premium economy", "Business", "First"],
                 planInput :  "Economy",
+                init() {
+                    plan = this.planInput;
+                },
                 change(p) {
                     this.planInput = p;
+                    // plan = p;
                 },
             }
         }
@@ -515,6 +548,7 @@
                 select(t) {
                     this.fromInput = t;
                     this.isOpen = false;
+                    // from1 = this.fromInput;
                 }
             }
         }
@@ -541,7 +575,14 @@
                 select(t) {
                     this.toInput = t;
                     this.isOpen = false;
+                    // to1 = this.toInput;
                 }
+            }
+        }
+
+        function dateSelect() {
+            return {
+                departure1 : "",
             }
         }
     </script>

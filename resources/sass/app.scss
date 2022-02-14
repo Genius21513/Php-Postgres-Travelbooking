@@ -55,7 +55,7 @@ input:invalid, textarea:invalid, select:invalid {
 }
 
 .datepicker.datepicker-dropdown {
-    @apply -ml-2 -mt-14 z-10 shadow border rounded-xl pt-0;
+    @apply z-10 shadow border rounded-xl pt-0;
 }
 
 // @import "./custom-utilities.css";
