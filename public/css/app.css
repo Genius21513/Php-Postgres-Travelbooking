@@ -887,6 +887,18 @@ input:invalid, textarea:invalid, select:invalid {
 .w-screen {
 	width: 100vw;
 }
+.w-1\/5 {
+	width: 20%;
+}
+.w-1 {
+	width: 0.25rem;
+}
+.w-6\/12 {
+	width: 50%;
+}
+.min-w-full {
+	min-width: 100%;
+}
 .max-w-6xl {
 	max-width: 72rem;
 }
