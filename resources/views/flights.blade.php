@@ -2,32 +2,6 @@
 
 @section('content')
 
-    <style>
-        .loader {
-            border-top-color: #3498db;
-            -webkit-animation: spinner 1.5s linear infinite;
-            animation: spinner 1.5s linear infinite;
-        }
-
-        @-webkit-keyframes spinner {
-            0% {
-                -webkit-transform: rotate(0deg);
-            }
-            100% {
-                -webkit-transform: rotate(360deg);
-            }
-        }
-
-        @keyframes spinner {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-
 	<main class="max-w-6xl mx-auto" x-data="search" x-init="init()">
         <section class="flex flex-col">
             <div class="sm:px-6 lg:px-8">
@@ -305,8 +279,8 @@
                 </template>
                 <template x-if="(data.DirectAirlines !== undefined)">
                     <template x-for="d in data.DirectAirlines">
-                        <div class="flex items-center py-5 border border-gray-300 mt-2">
-                            <div class="w-2/12 px-6 items-center">                                    
+                        <div class="flex items-center py-5 mt-2 border border-gray-300">
+                            <div class="items-center w-2/12 px-6">                                    
                                 <img class="w-12 h-auto rounded-full" :src="'http://rest.resvoyage.com/content/airline-logos/' + d.AirlineCode + '.png'" alt="">
                             </div>
                             <div class="w-5/12 px-6 space-y-0.5 items-center">
@@ -322,8 +296,8 @@
                 </template>
                 <template x-if="(data.OneStopAirlines !== undefined)">
                     <template x-for="d in data.DirectAirlines">
-                        <div class="flex items-center py-5 border border-gray-300 mt-2">
-                            <div class="w-2/12 px-6 items-center">                                    
+                        <div class="flex items-center py-5 mt-2 border border-gray-300">
+                            <div class="items-center w-2/12 px-6">                                    
                                 <img class="w-12 h-auto rounded-full" :src="'http://rest.resvoyage.com/content/airline-logos/' + d.AirlineCode + '.png'" alt="">
                             </div>
                             <div class="w-5/12 px-6 space-y-0.5 items-center">
@@ -339,8 +313,8 @@
                 </template>
                 <template x-if="(data.TwoStopAirlines !== undefined)">
                     <template x-for="d in data.DirectAirlines">
-                        <div class="flex items-center py-5 border border-gray-300 mt-2">
-                            <div class="w-2/12 px-6 items-center">                                    
+                        <div class="flex items-center py-5 mt-2 border border-gray-300">
+                            <div class="items-center w-2/12 px-6">                                    
                                 <img class="w-12 h-auto rounded-full" :src="'http://rest.resvoyage.com/content/airline-logos/' + d.AirlineCode + '.png'" alt="">
                             </div>
                             <div class="w-5/12 px-6 space-y-0.5 items-center">
@@ -370,7 +344,8 @@
         <x-newsletter/>
 	</main>
 
-    
+
+
 
     <script>
         let base_url = 'http://rest.resvoyage.com';
@@ -381,7 +356,7 @@
         let departure1 = '', departure2 = '';
 
         //Get Token
-        async function getToken() {            
+        async function getToken() {
             let token_url = base_url + '/api/v1/public/token?clientname=VslYXzycTIi';
             await fetch(token_url)
             .then((res) => res.json())
