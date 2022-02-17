@@ -32,7 +32,7 @@
             
             <div class="w-full p-8 bg-white border border-gray-100 shadow-md rounded-xl">
                 <div class="w-full md:flex">
-                    <div class="relative w-3/12 rounded-md" 
+                    <div class="relative w-4/12 rounded-md" 
                         x-data="toSelect()">
 
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -65,19 +65,15 @@
                                 </div>
                                 <div class="p-4 border-t-2 border-gray-100">
                                     <template x-for="item in cities">
-                                        <div class="cursor-pointer group" @click="select(item.Name, item.Code, item.Country);">
+                                        <div class="cursor-pointer group" @click="select(item.Name);">
                                             <div class="flex items-center pl-3 group-hover:bg-indigo-100">
-                                                <svg class="w-5 h-5"  viewBox="0 0 200 200" fill="currentColor" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M166.666 44.998v40.438h-6.078c-2.927-7.642-10.155-13.048-18.607-13.048H123.68c-8.452 0-15.68 5.406-18.607 13.048H94.927C92 77.794 84.772 72.388 76.32 72.388H58.019c-8.452 0-15.68 5.406-18.607 13.048H33.33V44.998h133.336zM180 113.749c0-10.387-7.445-18.982-17.131-20.414H37.131C27.44 94.767 20 103.362 20 113.749v41.253h13.33v-20.627h133.336v20.627H180v-41.253z"></path>
-                                                </svg>
-                                            
-                                                <!-- <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="currentColor" aria-hidden="true">
+                                                <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="currentColor" aria-hidden="true">
                                                     <path d="M178.081 41.973c-2.681 2.663-16.065 17.416-28.956 30.221c0 107.916 3.558 99.815-14.555 117.807l-14.358-60.402l-14.67-14.572c-38.873 38.606-33.015 8.711-33.015 45.669c.037 8.071-3.373 13.38-8.263 18.237L50.66 148.39l-30.751-13.513c10.094-10.017 15.609-8.207 39.488-8.207c8.127-16.666 18.173-23.81 26.033-31.62L70.79 80.509L10 66.269c17.153-17.039 6.638-13.895 118.396-13.895c12.96-12.873 26.882-27.703 29.574-30.377c7.745-7.692 28.017-14.357 31.205-11.191c3.187 3.166-3.349 23.474-11.094 31.167zm-13.674 42.469l-8.099 8.027v23.58c17.508-17.55 21.963-17.767 8.099-31.607zm-48.125-47.923c-13.678-13.652-12.642-10.828-32.152 8.57h23.625l8.527-8.57z"></path>
-                                                </svg> -->
+                                                </svg>
                                                 
                                                 <a class="block p-4 border-l-4 border-transparent">
-                                                    <p class="text-gray-300" x-text="item.Name + ', ' + item.Code"></p>
-                                                    <p class="text-sm text-gray-900" x-text="item.Country"></p>
+                                                    <p x-text="item.Name"></p>
+                                                    <p x-text="item.Region" class="text-sm text-gray-600"></p>
                                                 </a>
                                             </div>
                                         </div>    
@@ -88,19 +84,18 @@
                         
                     </div>
 
-                    <div class="relative w-5/12"
+                    <div class="relative w-4/12"
                         x-data="dateSelect()">
                         <div class="flex items-center px-6"
                             date-rangepicker 
-                            datepicker-orientation="bottom"
-                            datepicker-format="yyyy-mm-dd">
+                            datepicker-orientation="bottom">
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
                                 </div>
-                                <input class="block w-full py-3 pl-10 bg-gray-100 border-2 border-gray-800 rounded-md outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md" name="startDate" readonly type="text"  placeholder="Check-In" />
+                                <input class="block w-full py-3 pl-10 bg-gray-100 border-2 border-gray-800 rounded-md outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md" name="start" readonly type="text"  placeholder="Check-In" />
                             </div>
                             <div class="relative ml-4">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -108,7 +103,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
                                 </div>
-                                <input class="block w-full py-3 pl-10 bg-gray-100 border-2 border-gray-800 rounded-md outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md" name="endDate" readonly type="text"  placeholder="Check-Out" />
+                                <input class="block w-full py-3 pl-10 bg-gray-100 border-2 border-gray-800 rounded-md outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md" name="end" readonly type="text"  placeholder="Check-Out" />
                             </div>
                         </div>
                     </div>
@@ -193,28 +188,24 @@
                             <p class="text-gray-600"> There are no data to show. </div>
                         </template>
 
-                        <template x-if="!noData">
-                            <template x-for="d in data">
-                                <div class="flex items-center mt-3 border border-gray-300 rounded-md">
-                                    <div class="w-3/12">
-                                        <img class="w-full rounded-md rounded-r-none" :src="d.HotelMainImage" />
-                                    </div>
-                                    <div class="w-5/12 px-3 space-y-0.5 items-center">
-                                        <p class="text-left text-gray-600" x-text="d.HotelName"></p>
-                                        <p class="text-left text-gray-600" x-text="d.ChainName"></p>
-                                        <template x-if="d.HotelAwards.length > 0">
-                                            <p class="text-sm text-left text-gray-500" x-text="d.HotelAwards[0].Rating"></p>    
-                                        </template>
-                                        <template x-if="d.HotelAddress !== null">
-                                            <p class="text-sm text-left text-gray-500" x-text="d.HotelAddress.StreetAddress"></p>
-                                        </template>
-                                    </div>
-                                    <div class="w-4/12 px-3 space-y-0.5 items-center">
-                                        <p class="text-right text-gray-600" x-text="d.DailyRatePerRoom + ' ' + d.CurrencyCode"></p>
-                                        <p class="text-right text-gray-500" >TEL : <span x-text="d.HotelPhone"></span> </p>
-                                    </div>
+                        <template x-for="d in data" x-if="!noData">
+                            <div class="flex items-center mt-3 border border-gray-300 rounded-md">
+                                <div class="w-3/12">
+                                    <img class="w-full rounded-md rounded-r-none" :src="d.HotelMainImage" />
                                 </div>
-                            </template>
+                                <div class="w-5/12 px-3 space-y-0.5 items-center">
+                                    <p class="text-left text-gray-600" x-text="d.HotelName"></p>
+                                    <p class="text-left text-gray-600" x-text="d.ChainName"></p>
+                                    <p class="text-sm text-left text-gray-500" x-text="d.HotelAwards[0].Rating"></p>
+                                    <template x-if="d.HotelAddress !== null">
+                                        <p class="text-sm text-left text-gray-500" x-text="d.HotelAddress.StreetAddress"></p>
+                                    </template>
+                                </div>
+                                <div class="w-4/12 px-3 space-y-0.5 items-center">
+                                    <p class="text-right text-gray-600" x-text="d.DailyRatePerRoom + ' ' + d.CurrencyCode"></p>
+                                    <p class="text-right text-gray-500" >TEL : <span x-text="d.HotelPhone"></span> </p>
+                                </div>
+                            </div>
                         </template>
                     </div>
                 </div>
@@ -237,9 +228,9 @@
         let token = '';
 
         
-        let toCityCode;
-        let startDate = '', endDate = '';
-        let nums = {};
+        let toCity;
+        let cinDate = '', coutDate = '';
+        let membs = {};
 
         //Get Token
         async function getToken() {
@@ -257,36 +248,33 @@
                 isLoading : false,
                 noData : true,
                 data : [],
+
                 init () {
                     getToken();
                 },
                 async goSearch() {
-                    
-                    // date getting
-                    startDate = document.querySelector('[name=startDate]').value;
-                    endDate = document.querySelector('[name=endDate]').value;
-
-                    if (toCityCode == '' || startDate == '' || endDate == '' || nums.rms == 0) {
-                        alert('Please, Input data');
-                        return;
-                    }
-                    
                     this.data = {};
-                    // nums url
-                    let n_url = '';
-                    if (nums.adu !== 0) {
-                        n_url += '&Adults=' + nums.adu;
-                    }
-                    if (nums.chi !== 0) {
-                        n_url += '&Children=' + nums.chi
-                    }
-                    if (nums.rms !== 0) {
-                        n_url += '&RoomCount=' + nums.rms;
-                    }
                     
-                    let url = base_url + '/api/v1/hotel/search?HotelCityCode=' + toCityCode 
-                                        + '&CheckInDate=' + startDate + '&CheckoutDate=' + endDate 
-                                        + n_url;
+                    // members url
+                    // let mem = '';
+                    // if (membs.adu !== 0) {
+                    //     mem += '&Adults=' + membs.adu;
+                    // }
+
+                    // if (membs.chi !== 0) {
+                    //     mem += '&Children=' + membs.chi
+                    // }
+
+                    // if ((membs.ifs + membs.ifl) !== 0) {
+                    //     mem += '&Infants=' + (membs.ifs + membs.ifl);
+                    // }
+
+                    // input url
+                    //let departure1 = document.querySelector('#departure1').value;
+
+                    // if (from1 === '' || to1 === '' || departure1 === '') return;
+                    
+                    let url = base_url + '/api/v1/hotel/search?HotelCityCode=PAR&CheckInDate=2022-02-15&CheckoutDate=2022-02-20&Adults=1&RoomCount=1';
                     
                     this.isLoading = true;
                     await fetch(url, {
@@ -295,8 +283,8 @@
                     .then((res) => res.json())
                     .then((response) => {
                         this.data = response.Hotels;
-                        this.noData = (response.Hotels.length === 0)? true : false;
                         this.isLoading = false;
+                        this.noData = false;
                     });
                 }
             }
@@ -356,7 +344,6 @@
                 },
                 setNumtext() {
                     this.numText = this.nums.rms + ' Room, ' + ( this.nums.adu + this.nums.chi) + ' Guest';
-                    nums = JSON.parse(JSON.stringify(this.nums));
                 }
             }
         }
@@ -379,15 +366,10 @@
                             this.cities = [...response];
                     });
                 },
-                select(t, c, cy) {
-                    // if (t == null) {
-                    //     this.toCity = cy;
-                    // } else {
-                    //     this.toCity = t + ', ' + cy;
-                    // }
+                select(t) {
                     this.toCity = t;
                     this.isOpen = false;
-                    toCityCode = c;
+                    toCity = t;
                 }
             }
         }

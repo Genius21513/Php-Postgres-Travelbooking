@@ -380,13 +380,6 @@
                 async goSearch() {
                     this.data = {};
 
-                    let departure1 = document.querySelector('#departure1').value;
-
-                    if (from1 === '' || to1 === '' || departure1 === '' || membs.all == 0 || membs.adu == 0) {
-                        alert('Please, Input data');
-                        return;
-                    }
-                    
                     // selection url
                     let sel = '';
                     sel = '&FlightClass=' + plan;
@@ -405,6 +398,13 @@
                         mem += '&Infants=' + (membs.ifs + membs.ifl);
                     }
 
+                    // input url
+                    // let from1 = document.querySelector('#from1').value;
+                    // let to1 = document.querySelector('#to1').value;
+                    let departure1 = document.querySelector('#departure1').value;
+
+                    if (from1 === '' || to1 === '' || departure1 === '') return;
+                    
                     let url = base_url + `/api/v1/air/search?from1=${from1}&to1=${to1}&DepartureDate1=${departure1}` + mem;
 
                     this.isLoading = true;
