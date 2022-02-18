@@ -86,4 +86,5 @@ class FlightsController extends Controller
     {
         return view('flights');
     }
+
 }

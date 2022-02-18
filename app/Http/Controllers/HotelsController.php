@@ -10,4 +10,9 @@ class HotelsController extends Controller
     {
         return view('hotels');
     }
+
+    public function detail_index(Request $request)
+    {
+        return view('hotels-detail');
+    }
 }

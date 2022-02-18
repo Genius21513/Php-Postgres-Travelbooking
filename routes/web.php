@@ -53,9 +53,11 @@ Route::get('/cars/{area?}',                         [CarsController::class, 'ind
 Route::get('/cars/{area}/{country?}',               [CarsController::class, 'area_index'])->name('cars.area');
 Route::get('/cars/{area}/{country}/{city?}',        [CarsController::class, 'city_index'])->name('cars.city');
 
+Route::get('/hotels/detail',                        [HotelsController::class, 'detail_index'])->name('hotels.detail');
 Route::get('/hotels/{area?}',                       [HotelsController::class, 'index'])->name('hotels');
 Route::get('/hotels/{area}/{country?}',             [HotelsController::class, 'area_index'])->name('hotels.area');
 Route::get('/hotels/{area}/{country}/{city?}',      [HotelsController::class, 'city_index'])->name('hotels.city');
+
 
 Route::get('/yacht-charter/{area?}',                [YachtCharterController::class, 'index'])->name('yachts');
 Route::get('/jet-charter/{area?}',                  [JetCharterController::class, 'index'])->name('jets');
