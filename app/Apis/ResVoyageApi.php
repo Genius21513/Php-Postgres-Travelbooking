@@ -9,10 +9,16 @@ use Exception;
 class ResVoyageApi
 {
     const AUTH_ENDPOINT                     = "public/token";
+
+    const AIRLINE_SEARCH_ENDPOINT           = "air/references/airlines";
+    const AIRPORT_CITY_SEARCH_ENDPOINT      = "air/references/airports";
     const AIR_SEARCH_ENDPOINT               = "air/search";
+
     const DESTINATION_SEARCH_ENDPOINT       = "hotel/references/destination/";
+
     const HOTEL_SEARCH_ENDPOINT             = "hotel/search";
     const HOTEL_DETAILS_ENDPOINT            = "hotel/details";
+
     const CAR_SEARCH_ENDPOINT               = "car/search";
     const CAR_DETAILS_ENDPOINT              = "car/details";
 
@@ -50,6 +56,34 @@ class ResVoyageApi
         {
             throw new Exception($response->status());
         }
+    }
+
+    public function searchAirportCity($name) : array
+    {
+        if (!$this->isAuthenticated())
+        {
+            $this->Authenticate();
+        }
+        $endpoint = $this->base_url.ResVoyageApi::AIRPORT_CITY_SEARCH_ENDPOINT;
+
+        $response = Http::withToken($this->access_token)->withOptions([
+            'verify' => false,
+        ])->get($endpoint,
+            [
+                'search' => $name
+            ]
+        );
+
+        if ($response->ok())
+        {
+            if ($response->json() == null) return array();
+            return $response->json();
+        }
+        else
+        {
+            throw new Exception($response->status());
+        }
+
     }
 
     public function searchAir($from, $to, $departureDate, $adults) : array

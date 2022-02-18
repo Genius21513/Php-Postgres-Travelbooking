@@ -8,6 +8,8 @@ use App\Http\Livewire\Auth\Passwords\Email;
 use App\Http\Livewire\Auth\Passwords\Reset;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Auth\Verify;
+use App\Http\Livewire\Flights;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FlightsController;
@@ -32,10 +34,16 @@ use App\Http\Controllers\OtherController;
 |
 */
 
-Route::get('/',                                     [FlightsController::class, 'home'])->name('home');
-Route::get('/flights/{area?}',                      [FlightsController::class, 'index'])->name('flights');
-Route::get('/flights/{area}/{country?}',            [FlightsController::class, 'area_index'])->name('flights.area');
-Route::get('/flights/{area}/{country}/{city?}',     [FlightsController::class, 'city_index'])->name('flights.city');
+Route::get('/',                                     Flights::class)->name('home');
+
+Route::get('/flights/{area?}',                      Flights::class)->name('flights');
+Route::get('/flights/{area}/{country?}',            Flights::class)->name('flights.area');
+Route::get('/flights/{area}/{country}/{city?}',     Flights::class)->name('flights.city');
+
+// Route::get('/',                                     [FlightsController::class, 'home'])->name('home');
+// Route::get('/flights/{area?}',                      [FlightsController::class, 'index'])->name('flights');
+// Route::get('/flights/{area}/{country?}',            [FlightsController::class, 'area_index'])->name('flights.area');
+// Route::get('/flights/{area}/{country}/{city?}',     [FlightsController::class, 'city_index'])->name('flights.city');
 
 Route::get('/cruises/{area?}',                      [CruisesController::class, 'index'])->name('cruises');
 Route::get('/cruises/{area}/{country?}',            [CruisesController::class, 'area_index'])->name('cruises.area');
@@ -89,3 +97,4 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', LogoutController::class)
         ->name('logout');
 });
+
