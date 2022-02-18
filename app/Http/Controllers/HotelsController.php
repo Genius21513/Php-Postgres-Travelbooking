@@ -13,6 +13,9 @@ class HotelsController extends Controller
 
     public function detail_index(Request $request)
     {
+        $s = $request->input('sessionid');
+        $h = $request->input('hotelid');
+        
         return view('hotels-detail');
     }
 }

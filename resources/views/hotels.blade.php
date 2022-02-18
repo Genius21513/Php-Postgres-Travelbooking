@@ -39953,9 +39953,23 @@
                         <p class="text-gray-600"> There is no data to show. </div>
                     </template>
 
+                    <form id="detail-form" action="{{ route('hotels.detail') }}" method="POST" target="_blank">
+                        @csrf
+                        <input type="hidden" name="sessionid" :value="data.SessionId"/>
+                        <input type="hidden" name="hotelid" id="hotelid" value="" />
+                    </form>
+
+                    <script>
+                        function goDetail(hid)
+                        {
+                            document.getElementById('hotelid').value = hid;
+                            document.getElementById('detail-form').submit();
+                        }
+                    </script>
+                    
                     <template x-if="!noData">
                         <template x-for="d in data.Hotels">
-                            <a href="/hotels/detail">
+                            <button :id="d.Id" onclick="goDetail(this.getAttribute('id'))">
                                 <div class="flex items-center mt-3 border border-gray-300 rounded-md">
                                     <div class="w-3/12">
                                         <img class="w-full rounded-md rounded-r-none" :src="d.HotelMainImage" />
@@ -39975,7 +39989,7 @@
                                         <p class="text-right text-gray-500" >TEL : <span x-text="d.HotelPhone"></span> </p>
                                     </div>
                                 </div>
-                            </a>
+                            </button>
                         </template>
                     </template>
                 </div>
