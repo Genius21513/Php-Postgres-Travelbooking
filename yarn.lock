@@ -2961,6 +2961,15 @@ find-up@^4.0.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
+flowbite@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.npmjs.org/flowbite/-/flowbite-1.3.4.tgz#60c3f729a7bde26f3f4f9222a835e362321d93b9"
+  integrity sha512-i/gA7BcyMk2cFwJb78wvxrTj+XDnchjIBywksip3AFMD/KKpwtQ9hgrCJpR515jVuil0tKhLIebBotvorgayBQ==
+  dependencies:
+    "@docsearch/js" "^3.0.0-alpha.42"
+    "@popperjs/core" "^2.9.3"
+    mini-svg-data-uri "^1.4.3"
+
 focus-trap@^6.6.1:
   version "6.7.3"
   resolved "https://registry.npmjs.org/focus-trap/-/focus-trap-6.7.3.tgz#b5dc195b49c90001f08a63134471d1e6dd381ddd"
