@@ -850,6 +850,12 @@ input:invalid, textarea:invalid, select:invalid {
 .bottom-0 {
 	bottom: 0px;
 }
+.right-2 {
+	right: 0.5rem;
+}
+.bottom-2 {
+	bottom: 0.5rem;
+}
 .z-20 {
 	z-index: 20;
 }
@@ -920,6 +926,10 @@ input:invalid, textarea:invalid, select:invalid {
 .-my-2 {
 	margin-top: -0.5rem;
 	margin-bottom: -0.5rem;
+}
+.my-5 {
+	margin-top: 1.25rem;
+	margin-bottom: 1.25rem;
 }
 .mb-2 {
 	margin-bottom: 0.5rem;
@@ -1137,6 +1147,9 @@ input:invalid, textarea:invalid, select:invalid {
 .w-screen {
 	width: 100vw;
 }
+.w-24 {
+	width: 6rem;
+}
 .min-w-full {
 	min-width: 100%;
 }
@@ -1211,6 +1224,20 @@ input:invalid, textarea:invalid, select:invalid {
 .transform {
 	transform: var(--tw-transform);
 }
+@-webkit-keyframes pulse {
+	50% {
+		opacity: .5;
+	}
+}
+@keyframes pulse {
+	50% {
+		opacity: .5;
+	}
+}
+.animate-pulse {
+	-webkit-animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+	        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 .cursor-default {
 	cursor: default;
 }
@@ -1261,6 +1288,9 @@ input:invalid, textarea:invalid, select:invalid {
 .items-start {
 	align-items: flex-start;
 }
+.items-end {
+	align-items: flex-end;
+}
 .items-center {
 	align-items: center;
 }
@@ -1278,6 +1308,9 @@ input:invalid, textarea:invalid, select:invalid {
 }
 .justify-around {
 	justify-content: space-around;
+}
+.justify-items-end {
+	justify-items: end;
 }
 .gap-3 {
 	gap: 0.75rem;
@@ -1352,6 +1385,9 @@ input:invalid, textarea:invalid, select:invalid {
 .overflow-hidden {
 	overflow: hidden;
 }
+.overflow-ellipsis {
+	text-overflow: ellipsis;
+}
 .whitespace-nowrap {
 	white-space: nowrap;
 }
@@ -1400,6 +1436,9 @@ input:invalid, textarea:invalid, select:invalid {
 }
 .rounded-br-none {
 	border-bottom-right-radius: 0px;
+}
+.rounded-tr-none {
+	border-top-right-radius: 0px;
 }
 .border {
 	border-width: 1px;

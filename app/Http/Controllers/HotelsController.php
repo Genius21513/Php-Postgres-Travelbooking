@@ -24,8 +24,9 @@ class HotelsController extends Controller
         $s = $request->input('sessionid');
         $h = $request->input('hotelid');
         
-        $ret = $this->api->getHotelDetails ($s, $h);
-        return view('hotels-detail', ['data' => $ret]);
+        return view('hotels-detail', ['s'=>$s, 'h'=>$h]);
+        // $ret = $this->api->getHotelDetails ($s, $h);
+        // return view('hotels-detail', ['data' => $ret]);
     }
 
     public function search_dest (Request $request)

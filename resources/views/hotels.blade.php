@@ -291,38 +291,6 @@
                     this.data = {};
 
                     // nums url
-                    {{-- let n_url = '';
-                    if (nums.adu !== 0) {
-                        n_url += '&adu=' + nums.adu;
-                    }
-                    if (nums.chi !== 0) {
-                        n_url += '&chi=' + nums.chi
-                    }
-                    if (nums.rms !== 0) {
-                        n_url += '&rc=' + nums.rms;
-                    }
-
-                    // call function
-                    let url = '{{ url()->current() }}' + '/search/hotel?hcc=' + toCityCode 
-                                        + '&cid=' + startDate + '&cod=' + endDate 
-                                        + n_url;
-
-                    this.isLoading = true;
-
-                    await fetch(url)
-                    .then((res) => res.json())
-                    .then((response) => {
-                        this.isLoading = false;
-                        this.noData = false;
-                        if (response && response.Hotels.length > 0) {
-                            this.data = response;
-                            this.noData = (response.Hotels.length === 0)? true : false;
-                        }
-                    }); --}}
-
-
-
-                    // nums url
                     let n_url = '';
                     if (nums.adu !== 0) {
                         n_url += '&Adults=' + nums.adu;
@@ -344,7 +312,6 @@
                     })
                     .then((res) => res.json())
                     .then((response) => {
-                        console.log(response);
                         this.isLoading = false;
                         this.noData = false;
                         if (response) {
@@ -419,13 +386,14 @@
                 init() { this.isOpen = false; },
                 async getCities() {
                     if (this.toCity === '') return;
-                    let url = '{{ url()->current() }}' + '/search?dest=' + this.toCity.toLowerCase();
-
-                    await fetch(url)
+                    let url = base_url + '/api/v1/hotel/references/destination/' + this.toCity.toLowerCase();
+                    await fetch(url, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    })
                     .then((res) => res.json())
                     .then((response) => {
                         if (response && response.length > 0)
-                            this.cities = response;
+                            this.cities = [...response];
                     });
                 },
                 select(t, c, cy) {
