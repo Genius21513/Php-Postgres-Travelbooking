@@ -76,7 +76,6 @@ class ResVoyageApi
 
         if ($response->ok())
         {
-            if ($response->json() == null) return array();
             return $response->json();
         }
         else
@@ -126,7 +125,7 @@ class ResVoyageApi
 
         $response = Http::withToken($this->access_token)->withOptions([
             'verify' => false,
-        ])->get($endpoint);
+        ])->get($endpoint, []);
 
         if ($response->ok())
         {
@@ -139,7 +138,7 @@ class ResVoyageApi
 
     }
 
-    public function searchHotel ($from, $to, $departureDate, $adults) : array
+    public function searchHotel ($hcode, $cin, $cout, $adus, $rooms) : array
     {
         if (!$this->isAuthenticated())
         {
@@ -151,13 +150,14 @@ class ResVoyageApi
             'verify' => false,
         ])->get($endpoint,
             [
-                'from1' => $from,
-                'to1' => $to,
-                'DepartureDate1' => $departureDate,
-                'Adults' => $adults,
+                'HotelCityCode' => $hcode,
+                'CheckInDate' => $cin,
+                'CheckOutDate' => $cout,
+                'Adults' => $adus,
+                'RoomCount' => $rooms,
             ]
         );
-
+        
         if ($response->ok())
         {
             return $response->json();
